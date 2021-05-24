@@ -39,11 +39,12 @@ class HomeController extends AbstractController
         if (file_exists($mysqlExportPath))
             unlink($mysqlExportPath);
 
-        // exec("mysqldump -u$mysqlUserName $mysqlDatabaseName > $mysqlExportPath", $output, $worked);
+        // exec("mysqldump -u$user $db > $mysqlExportPath", $output, $worked);
        
-        $q='mysqldump --user='.$user.' '.$db.'>C:\filesSQL\magasin_export.sql';
-         exec($q, $output, $worked);
-        // $response = $translator->trans("Une erreur s est produite lors de l'exportation") . "\n" . implode('<br>', $output);
+        $q='mysqldump --user='.$user.' '.$db.'>'.$mysqlExportPath;
+
+        //  exec($q, $output, $worked);
+
         $response = [
             'status' => 'danger',
             'msg' => $translator->trans("Une erreur est produite lors de l' exportation") 
@@ -55,14 +56,12 @@ class HomeController extends AbstractController
              {
                  throw new ProcessFailedException($process);
 
-                //   $response = 1;
                 $response = [
                     'status' => 'danger',
                     'msg' => $translator->trans("Une erreur est produite lors de l' exportation") 
                 ];
                 }
              else {
-                //   $response = $translator->trans("l'operation est terminée avec succés") . "\n" . implode('<br>', $output);
                 $response = [
                     'status' => 'success',
                     'msg' => $translator->trans("l'operation est terminée avec succés")  
@@ -125,14 +124,11 @@ class HomeController extends AbstractController
          $response = [
              'status' => 'danger',
              'msg' => $translator->trans("Une erreur est produite lors de l importation")
-            //  . implode('<br>', $output)
+            
          ];
-      //  $this->addFlash('danger', 'Une erreur est produite lors de l importation ');
       if ($process->isSuccessful())
         
       {
-        // throw new ProcessFailedException($process);
-
         $response = [
             'status' => 'success',
             'msg' => $translator->trans("L'importation de votre fichier est terminée avec succes.")

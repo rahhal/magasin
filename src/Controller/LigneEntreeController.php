@@ -52,15 +52,7 @@ class LigneEntreeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="ligne_entree_show", methods={"GET"})
-     */
-    public function show(LigneEntree $ligneEntree): Response
-    {
-        return $this->render('ligne_entree/show.html.twig', [
-            'ligne_entree' => $ligneEntree,
-        ]);
-    }
+
 
     /**
      * @Route("/{id}/edit", name="ligne_entree_edit", methods={"GET","POST"})

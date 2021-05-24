@@ -54,17 +54,7 @@ class AnneeController extends AbstractController
 
         ));
     }
-
-    /**
-     * @Route("/show/{id}", name="annee_show", methods={"GET"})
-     */
-    public function show(Annee $annee): Response
-    {
-        return $this->render('annee/show.html.twig', [
-            'annee' => $annee,
-        ]);
-    }
-
+    
     /**
      * @Route("/{id}", name="annee_delete", methods={"DELETE"})
      */
@@ -78,16 +68,5 @@ class AnneeController extends AbstractController
 
         return $this->redirectToRoute('annee_new');
     }
-        /*$em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('Annee')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Preisliste entity.');
-        }
-
-        $em->remove($entity);
-        $em->flush();
-
-        return $this->redirect($this->generateUrl('annee_new')); */
-   // }
+        
         }

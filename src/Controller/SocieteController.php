@@ -77,7 +77,7 @@ class SocieteController extends AbstractController
         $em= $this->getDoctrine()->getManager();
         //$societe = $em->getRepository(Societe::class)->find($id);
 
-        /*$institution = $em->getRepository(Institution::class)
+        /*$societe = $em->getRepository(Societe::class)
                           ->findSocieteByUser($this->getUser()->getId());*/
         $societe = $entityManager->getRepository('App:Societe')
             ->findOneBy(['user' => $this->getUser()->getId()]);

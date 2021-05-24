@@ -50,15 +50,6 @@ class LigneSortieController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="ligne_sortie_show", methods={"GET"})
-     */
-    public function show(LigneSortie $ligneSortie): Response
-    {
-        return $this->render('ligne_sortie/show.html.twig', [
-            'ligne_sortie' => $ligneSortie,
-        ]);
-    }
 
     /**
      * @Route("/{id}/edit", name="ligne_sortie_edit", methods={"GET","POST"})
