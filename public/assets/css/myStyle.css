@@ -1,0 +1,20 @@
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+background-color: #640202;
+font-size: 16px;
+}
+.bg-indigo {
+    background-color: #640202;
+    /* background-color: #e43905; */
+    /* border-color: #3F51B5;
+    color: #fff; */
+}
+body
+{
+    font-size: 16px;
+}
+.carousel-control {
+
+    width: 5%;
+    background-color: #f97e0a;
+}

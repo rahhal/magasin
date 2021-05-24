@@ -1,0 +1,440 @@
+
+{#<page backtop="0mm" backright="10mm" backbottom="20mm" backleft="10mm" style="font-family: 'arial'">	<style type="text/css">#}
+{# ------------filtrage de recherche par categorie et type----------#}
+
+
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>وصل دخول</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style>
+    table
+        {
+            width: 100%;
+            border-collapse:collapse;
+            font-size:12px;
+    }
+        .header td
+        {
+            width: 50%;
+            vertical-align: top}
+        .text-left
+        {
+            text-align: left}
+
+
+        .text-right
+        {
+            text-align: right}
+
+
+        .text-center
+        {
+            text-align: center}
+
+
+        .separator
+        {
+            height: 20px;
+            width: 100%}
+
+
+        .content td
+        {
+            border:solid 1px #CFD1D2;
+            padding: 5px;
+        }
+
+
+        .content th
+        {
+            border:solid 1px #000000;
+            padding: 5px;
+            background-color: #000000;
+            color: #FFFFFF}
+
+
+        .ligne1Content
+        {
+            background-color:#57B223}
+
+
+        .couleurgris
+        {
+            background-color:#DDDDDD;
+            height:auto;
+        }
+
+
+        .tht, .taxe, .ttc
+        {
+            font-size: 1.2em;
+        }
+
+
+        .ttc
+        {
+            color:#57B223;
+            font-weight:bold;
+        }
+
+
+        .couleurverte
+        {
+            background-color: #57B223}
+
+
+        .couleurmoinsgris
+        {
+            background: #EEEEEE;
+        }
+
+
+        .taille1
+        {
+            width:40%;
+        }
+
+
+        .taille2
+        {
+            width:15%;
+        }
+
+
+        .taille3
+        {
+            width:15%;
+        }
+
+
+        .taille4
+        {
+            width:20%;
+        }
+
+
+        .taille5
+        {
+            width:10%;
+        }
+
+
+        .header1
+        {
+            width:50%}
+
+
+        .header2
+        {
+            width:50%}
+
+
+        .tailleligne
+        {
+            height:auto;
+        }
+
+
+        .taille1, taille2, taille3, taille4, taille5
+        {
+            height:auto;
+        }
+
+
+        span
+        {
+            font-size:14px;
+            font-weight:bold;
+            color:#57B223;
+        }
+
+
+        h1, h2, h3
+        {
+            color:#57B223;
+        }
+
+
+        .colorwhite
+        {
+            color:white}
+    </style>
+
+</head>
+<body>
+
+
+    <h1 class="text-center">قائمة المواد</h1>
+    <span class="text-left">
+        التاريخ:
+        {{ "now"|date }}</span>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+
+        <table class="content">
+            <tr>
+                <th class="text-center couleurgris "  >{{ "Libele ar"|trans }}</th>
+                <th class="text-center couleurgris ">{{  "Categorie" | trans }}</th>
+                <th class="text-center couleurgris ">{{  "Type" | trans }}</th>
+                <th class="text-center couleurgris ">{{  "Qte ini" | trans }}</th>
+                <th class="text-center couleurgris ">{{  "Qte alerte" | trans }}</th>
+
+            </tr>
+            {% for article in articles %}
+
+                <tr class="couleurgris">
+
+                    <td >{{ article.libele }}</td>
+                    <td >{{ article.categorie }}</td>
+                    <td >{{ article.type }}</td>
+                    <td >{{ article.qteIni }}</td>
+                    <td >{{ article.qteMin }}</td>
+                </tr>
+            {% endfor %}
+
+
+        </table>
+</body>
+{#</page>#}
+{#<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>facture </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+</head>
+<body >
+HELLO MY FACTUREvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+vvvvvvvvvvvvvv
+vvvvvvvvv
+</body>
+</html>#}
+
+{#
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>قائمة المواد </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style>
+       /* table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td, th {
+            border: 1px solid #000;
+            text-align: left;
+            padding: 8px;
+        }*/
+        table
+       {
+           width: 100%;
+           border-collapse: collapse;
+           font-size:16px}
+       td, th {
+           border: 1px solid #000;
+           text-align: left;
+           padding: 8px;
+       }
+       .header td
+       {
+           width: 50%;
+           vertical-align: top}
+       .text-left
+       {
+           text-align: left}
+
+
+       .text-right
+       {
+           text-align: right}
+
+
+       .text-center
+       {
+           text-align: center}
+
+
+       .separator
+       {
+           height: 20px;
+           width: 100%}
+
+
+       .content td
+       {
+           border:solid 1px #CFD1D2;
+           padding: 5px;
+       }
+
+
+       .content th
+       {
+           border:solid 1px #000000;
+           padding: 5px;
+           background-color: #000000;
+           color: #FFFFFF}
+
+
+       .ligne1Content
+       {
+           background-color:#57B223}
+
+
+       .couleurgris
+       {
+           background-color:#DDDDDD;
+           height:auto;
+       }
+
+
+       .tht, .taxe, .ttc
+       {
+           font-size: 1.2em;
+       }
+
+
+       .ttc
+       {
+           color:#57B223;
+           font-weight:bold;
+       }
+
+
+       .couleurverte
+       {
+           background-color: #57B223}
+
+
+       .couleurmoinsgris
+       {
+           background: #EEEEEE;
+       }
+
+
+       .taille1
+       {
+           width:40%;
+       }
+
+
+       .taille2
+       {
+           width:15%;
+       }
+
+
+       .taille3
+       {
+           width:15%;
+       }
+
+
+       .taille4
+       {
+           width:20%;
+       }
+
+
+       .taille5
+       {
+           width:10%;
+       }
+
+
+       .header1
+       {
+           width:50%}
+
+
+       .header2
+       {
+           width:50%}
+
+
+       .tailleligne
+       {
+           height:auto;
+       }
+
+
+       .taille1, taille2, taille3, taille4, taille5
+       {
+           height:auto;
+       }
+
+
+       span
+       {
+           font-size:14px;
+           font-weight:bold;
+           color:#57B223;
+       }
+
+
+       h1, h2, h3
+       {
+           color:#57B223;
+       }
+
+
+       .colorwhite
+       {
+           color:white}
+
+    </style>
+</head>
+<body style="font-family: dejavusans">
+
+
+
+<h2 style="text-align: center">قائمة المواد</h2>
+<br>
+<br>
+<br>
+<br>
+
+<br>
+<br>
+<table>
+    <tr>
+        <th style="text-align: center" >{{ "Libele ar"|trans }}</th>
+        <th style="text-align: center">{{  "Categorie" | trans }}</th>
+        <th style="text-align: center">{{  "Type" | trans }}</th>
+        <th style="text-align: center">{{  "Qte ini" | trans }}</th>
+        <th style="text-align: center">{{  "Qte alerte" | trans }}</th>
+
+    </tr>
+    {% for article in articles %}
+
+        <tr>
+
+            <td style="text-align: center">{{ article.libele }}</td>
+            <td style="text-align: center">{{ article.categorie }}</td>
+            <td style="text-align: center">{{ article.type }}</td>
+            <td style="text-align: center">{{ article.qteIni }}</td>
+            <td style="text-align: center">{{ article.qteMin }}</td>
+
+        </tr>
+    {% endfor %}
+
+
+</table>
+<br>
+<br>
+<br>
+<br>
+<h4 style="text-align: center">الإمضـــــــاء</h4>
+#}
+{# <h4 style="text-align: center">رئيس الوحدة</h4> #}{#
+
+</body>
+</html>#}
+

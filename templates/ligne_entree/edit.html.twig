@@ -1,0 +1,77 @@
+
+{% extends 'base.html.twig' %}
+{# {% block title %} {{ app.user.email|upper }} {% endblock %} #}
+
+{% block body_class %} class="nav-md" {% endblock %}
+{% block body %}
+    {#<div class="layout-boxed navbar-top">#}
+    {% include('layout/navbar.html.twig') %}
+
+    <!-- Page container -->
+    <div class="page-container">
+        <!-- Page content -->
+        <div class="page-content">
+            <!-- Main content -->
+            <div class="content-wrapper">
+                <!-- Page header -->
+                <div class="col-md-12">
+                    <div class="page-header page-header-default">
+                        <div class="page-header-content">
+                            <div class="page-title">
+
+                            </div>
+                        </div>
+                        <div class="breadcrumb-line">
+                            <ul class="breadcrumb">
+                                <li><a href="#"><i class="icon-home2 position-left"></i> المواد المستهلكة</a></li>
+                                <li class="active">خروج المواد</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /page header -->
+                <!-- Content area -->
+
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="content">
+                            <div class="row">
+
+                                <div class="col-md-12">
+
+                                    <!-- Basic layout-->
+                                    <div class="panel panel-flat">
+                                        <div class="panel-heading">
+                                            <h1 class="panel-title">{{ form.vars.value.id == null ? "New user"|trans :"Edit information"|trans }}</h1>
+                                            <div class="heading-elements">
+                                                <ul class="icons-list">
+                                                    <li><a data-action="collapse"></a></li>
+                                                </ul>
+                                            </div>
+                                            {% include('layout/flash-messages.html.twig') %}
+                                        </div>
+                                        <hr>
+                                        <div class="panel-body">
+                                            {{ include('ligne_entree/_form.html.twig', {'button_label': 'Update'}) }}
+
+                                            <a href="{{ path('entree_show', {'id': ligne_entree.entree.id}) }}" class="btn btn-default"><i class="glyphicon glyphicon-arrow-right" style="margin-left: 1rem"></i>{{ "back to list"|trans }}</button></a>
+                                        {#  {{ include('ligne_entree/_delete_form.html.twig') }}#}
+                                        </div>
+                                    </div>
+                                    <!-- /basic layout -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /content area -->
+            </div>
+            <!-- /main content -->
+
+        </div>
+        <!-- /page content -->
+        {% include('layout/footer.html.twig') %}
+    </div>
+    <!-- /page container -->
+{% endblock %}

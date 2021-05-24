@@ -1,0 +1,138 @@
+
+{% extends 'base.html.twig' %}
+{# {% block title %} {{ app.user.email|upper }} {% endblock %} #}
+
+{% block body_class %} class="nav-md" {% endblock %}
+{% block body %}
+    {#<div class="layout-boxed navbar-top">#}
+    {% include('layout/navbar.html.twig') %}
+
+<!-- Page container -->
+<div class="page-container">
+    <!-- Page content -->
+    <div class="page-content">
+        <!-- Main content -->
+        <div class="content-wrapper">
+            <!-- Page header -->
+            <div class="col-md-12">
+                <div class="page-header page-header-default">
+                    <div class="page-header-content">
+                        <div class="page-title">
+
+                        </div>
+                    </div>
+                    <div class="breadcrumb-line">
+                        <ul class="breadcrumb">
+                            <li><a href="#"><i class="icon-home2 position-left"></i> الادارة</a></li>
+                            <li class="active">المستخدمين</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /page header -->
+            <!-- Content area -->
+
+                    <div class="col-md-12">
+                        <div class="panel">
+                            {#<div class="title">
+                                <h1> &nbsp;{{ "User new"|trans }}&nbsp;&nbsp; </h1>
+
+                                <hr>
+                            </div>#}
+                            <div class="content">
+                                <div class="row">
+
+                                    <div class="col-md-12">
+
+                                        <!-- Basic layout-->
+                                        <div class="panel panel-flat">
+                                            <div class="panel-heading">
+                                                <h1 class="panel-title">{{ form.vars.value.id == null ? "New user"|trans :"Edit information"|trans }}</h1>
+                                                <div class="heading-elements">
+                                                    <ul class="icons-list">
+                                                        <li><a data-action="collapse"></a></li>
+                                                    </ul>
+                                                </div>
+                                                {% include('layout/flash-messages.html.twig') %}
+                                            </div>
+                                            <hr>
+
+                                            <div class="panel-body">
+                                                {{ form_start(form, {'attr': {'class': 'form-horizontal form-label-left'}}) }}
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label" required="required">{{ "Fullname"|trans }} </label>
+
+                                                    <div class="col-lg-6">
+                                                        {{ form_widget(form.fullname,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">{{ "Societe"|trans }}</label>
+                                                    <div class="col-lg-6">
+                                                        {{ form_widget(form.societe,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">{{ "Rib"|trans }}</label>
+                                                    <div class="col-lg-6">
+                                                        {{ form_widget(form.rib,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">{{ "Cin"|trans }}</label>
+                                                    <div class="col-lg-6">
+                                                        {{ form_widget(form.cin,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">{{ "Tel"|trans }}</label>
+                                                    <div class="col-lg-6">
+                                                        {{ form_widget(form.tel,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">{{ "Adresse"|trans }}</label>
+                                                    <div class="col-lg-6">
+                                                        {{ form_widget(form.adresse,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">{{ "Email"|trans }}</label>
+                                                    <div class="col-lg-6">
+                                                        {{ form_widget(form.email,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">{{ "Avatar"|trans }}</label>
+                                                    <div class="col-lg-6">
+                                                        {{ form_widget(form.avatar,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="form-group">
+                                                    {{ include('user/_form.html.twig') }}
+                                                </div>
+                                                {{ form_end(form) }}
+                                            </div>
+                                        </div>
+                                        <!-- /basic layout -->
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- /content area -->
+            </div>
+            <!-- /main content -->
+
+    </div>
+        <!-- /page content -->
+        {% include('layout/footer.html.twig') %}
+</div>
+    <!-- /page container -->
+
+    {% endblock %}

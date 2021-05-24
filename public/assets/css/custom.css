@@ -1,0 +1,12 @@
+span.select2.select2-container.select2-container--default{
+    margin: 0 7px;
+}
+
+.dataTables_filter input[type="search"]{
+    margin-right: 5px;
+}
+
+.symbol.required:before {
+    content: '*';
+    color: red;
+}

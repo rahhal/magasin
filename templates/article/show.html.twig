@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+
+{#<div class="layout-boxed navbar-top">#}
+    {% include('layout/navbar.html.twig') %}
+    <!-- Page container -->
+    <div class="page-container">
+
+        <!-- Page content -->
+        <div class="page-content">
+            <!-- Main content -->
+            <div class="content-wrapper">
+                <!-- Page header -->
+                <div class="page-header page-header-default">
+                    <div class="page-header-content">
+                        <div class="page-title">
+
+                        </div>
+                    </div>
+
+                    <div class="breadcrumb-line">
+                        <ul class="breadcrumb">
+                            <li><a href="#"><i class="icon-home2 position-left"></i> الملف</a></li>
+                            <li class="active">{{ "Societe"|trans }}</li>
+                        </ul>
+
+                    </div>
+                </div>
+                <!-- /page header -->
+                <!-- Content area -->
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="col-md-12">
+
+                            <!-- Basic layout-->
+                            <div class="panel panel-flat">
+                                <div class="panel-heading">
+                                    <h1 class="panel-title">{{ "Article"|trans }}</h1>
+                                    <div class="heading-elements">
+                                        <ul class="icons-list">
+                                            <li><a data-action="collapse"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <hr>
+
+                                <div class="panel-body">
+
+
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th>Id</th>
+                                            <td>{{ article.id }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Libele</th>
+                                            <td>{{ article.libele }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Qte_min</th>
+                                            <td>{{ article.qteMin }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Remarque</th>
+                                            <td>{{ article.remarque }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <a href="{{ path('article_index') }}">back to list</a>
+
+                                <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
+
+                                {{ include('article/_delete_form.html.twig') }}
+
+                                </div>
+                            </div>
+                            <!-- /basic layout -->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /content area -->
+            </div>
+            <!-- /main content -->
+
+        </div>
+        <!-- /page content -->
+        {% include('layout/footer.html.twig') %}
+    </div>
+    <!-- /page container -->
+{#</div>#}
+
+{% endblock %}

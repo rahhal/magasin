@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LigneInventaire{% endblock %}
+
+{% block body %}
+    <h1>LigneInventaire</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ligne_inventaire.id }}</td>
+            </tr>
+            <tr>
+                <th>QteInv</th>
+                <td>{{ ligne_inventaire.qteInv }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('ligne_inventaire_index') }}">back to list</a>
+
+    <a href="{{ path('ligne_inventaire_edit', {'id': ligne_inventaire.id}) }}">edit</a>
+
+    {{ include('ligne_inventaire/_delete_form.html.twig') }}
+{% endblock %}

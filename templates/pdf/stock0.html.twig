@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html dir="rtl" >
+<head>
+    <meta charset="UTF-8">
+    <title>المخزون الحالي</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style>
+        table {
+            /*font-family: xbriyaz, sans-serif;*/
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td, th {
+            border: 1px solid #000;
+            text-align: left;
+            padding: 8px;
+        }
+
+    </style>
+</head>
+{#<body style="font-family:xbriyaz,sans-serif">#}
+<body>
+{% include('pdf/header.html.twig') %}
+<h3 style="text-align: left; ">
+    التاريخ:
+    {{ "now"|date('d-m-Y') }}</h3>
+{#{% for stock in stocks %}
+    {% if loop.first %}
+        <h3 style="text-align: left"> التاريخ: {{ stock.date | date('d-m-Y')  }}</h3>
+    {% endif %}
+{% endfor %}#}
+<h1 style="text-align: center; "> المخزون الحالي</h1>
+<br>
+<h3 style="text-align: right; "> الصنف:{{ categorie}}</h3>
+<h3 style="text-align: right; ">النوع: {{ type }}</h3>
+
+<table class="table table-bordered">
+    <thead>
+    <tr >
+        <th style="text-align: center">{{ "Libele ar"|trans }}</th>
+        <th style="text-align: center">{{ "Qte"|trans }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for stock in stocks|sort|reverse %}
+        <tr>
+            <td style="text-align: center">{{ stock.article }}</td>
+            <td style="text-align: center">{{ stock.qteReste }}</td>
+
+        </tr>
+    {% else %}
+        <tr style="text-align: center">
+            <td colspan="2" style="text-align: center">{{ "no records found"|trans }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

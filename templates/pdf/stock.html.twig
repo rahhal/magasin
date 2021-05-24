@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>المخزون الحالي</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style>
+        table {
+            /* font-family: xbriyaz, sans-serif; */
+            border-collapse: collapse;
+            width: 100%;
+        }
+         td, th {
+              border: 1px solid #000;
+              text-align: left;
+              padding: 8px;
+          }
+        /*table
+        {
+            width: 100%;
+            border-collapse:collapse;
+            font-size:12px;
+        }*/
+       /* .header td
+        {
+            width: 50%;
+            vertical-align: top}
+        .text-left
+        {
+            text-align: left}
+
+
+        .text-right
+        {
+            text-align: right}
+
+
+        .text-center
+        {
+            text-align: center}
+
+
+        .separator
+        {
+            height: 20px;
+            width: 100%}
+
+
+        .content td
+        {
+            border:solid 1px #CFD1D2;
+            padding: 5px;
+        }
+
+
+        .content th
+        {
+            border:solid 1px #000000;
+            padding: 5px;
+            background-color: #000000;
+            color: #FFFFFF}
+
+
+        .ligne1Content
+        {
+            background-color:#57B223}
+
+
+        .couleurgris
+        {
+            background-color:#DDDDDD;
+            height:auto;
+        }
+
+
+        .tht, .taxe, .ttc
+        {
+            font-size: 1.2em;
+        }
+
+
+        .ttc
+        {
+            color:#57B223;
+            font-weight:bold;
+        }
+
+
+        .couleurverte
+        {
+            background-color: #57B223}
+
+
+        .couleurmoinsgris
+        {
+            background: #EEEEEE;
+        }
+
+
+        .taille1
+        {
+            width:40%;
+        }
+
+
+        .taille2
+        {
+            width:15%;
+        }
+
+
+        .taille3
+        {
+            width:15%;
+        }
+
+
+        .taille4
+        {
+            width:20%;
+        }
+
+
+        .taille5
+        {
+            width:10%;
+        }
+
+
+        .header1
+        {
+            width:50%}
+
+
+        .header2
+        {
+            width:50%}
+
+
+        .tailleligne
+        {
+            height:auto;
+        }
+
+
+        .taille1, taille2, taille3, taille4, taille5
+        {
+            height:auto;
+        }
+
+
+        span
+        {
+            font-size:14px;
+            font-weight:bold;
+            color:#57B223;
+        }
+
+
+        h1, h2, h3
+        {
+            color:#57B223;
+        }
+
+
+        .colorwhite
+        {
+            color:white}*/
+    </style>
+</head>
+{# <body style="font-family:xbriyaz,sans-serif"> #}
+<body>
+
+{% include('pdf/header.html.twig') %}
+<h3 style="text-align: left; ">
+        التاريخ:
+        {{ "now"|date('d-m-Y') }}</h3>
+{#{% for stock in stocks %}
+    {% if loop.first %}
+        <h3 style="text-align: left"> التاريخ: {{ stock.date | date('d-m-Y')  }}</h3>
+    {% endif %}
+{% endfor %}#}
+<h1 style="text-align: center; "> المخزون الحالي</h1>
+<br>
+<br>
+
+
+<table class="table table-bordered">
+                                            <thead>
+                                            <tr >
+                                                <th style="text-align: center">{{ "Libele ar"|trans }}</th>
+                                                <th style="text-align: center">{{ "Qte reste"|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {# {% for stock in stocks|sort|reverse %} #}
+                                            {% for stock in stocks%}
+                                                <tr>
+                                                    <td style="text-align: center">{{ stock.article }}</td>
+                                                    <td style="text-align: center">{{ stock.qteReste }}</td>
+                                                
+                                                </tr>
+                                            {% else %}
+                                                <tr >
+                                                    <td colspan="2" style="text-align: center">{{ "no records found"|trans }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+</body>
+</html>

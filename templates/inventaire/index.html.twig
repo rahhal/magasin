@@ -1,0 +1,94 @@
+
+{% extends 'base.html.twig' %}
+{% import "form.html.twig" as formulaire %}
+{# {% block title %} {{ app.user.email|upper }} {% endblock %} #}
+
+{% block body_class %} class="nav-md" {% endblock %}
+{% block body %}
+
+    {#<div class="layout-boxed navbar-top">#}
+    {% include('layout/navbar.html.twig') %}
+    <!-- Page container -->
+    <div class="page-container">
+        <!-- Page content -->
+        <div class="page-content">
+            <!-- Main content -->
+            <div class="content-wrapper">
+                <!-- Page header -->
+                <div class="col-md-12">
+                    <div class="page-header page-header-default">
+                        <div class="page-header-content">
+                            <div class="page-title">
+
+                            </div>
+                        </div>
+                        <div class="breadcrumb-line">
+                            <ul class="breadcrumb">
+                                <li><a href="#"><i class="icon-home2 position-left"></i> الجرد</a></li>
+                                <li class="active">الجرد السنوي</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /page header -->
+                <!-- Content area -->
+                <div class="col-md-12">
+                    <div class="panel">
+
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="title">
+                                    <h1> &nbsp;{{ "Inventaire index"|trans }}&nbsp;&nbsp; </h1>
+
+                                    <hr>
+                                </div>
+                                <div class="content">
+                                    <div class="row">
+
+                                        <table class="table table-bordered">
+                                            <thead>
+
+                                            <tr class="bg-orange-800">
+                                                <th>{{ "Date"|trans }}</th>
+                                                <th>{{ "Num inv"|trans }}</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for inventaire in inventaires|sort|reverse %}
+                                                <tr>
+                                                    <td>{{ inventaire.date ? inventaire.date|date('Y-m-d') : '' }}</td>
+                                                    <td>{{ inventaire.numInv }}</td>
+
+                                                </tr>
+                                            {% else %}
+                                                <tr class="text-center">
+                                                    <td colspan="3">{{ "no records found"|trans }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        <br>
+                                        <br>
+                                        <div class="text-right" >
+                                            {{ knp_pagination_render(inventaires) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /content area -->
+            </div>
+            <!-- /main content -->
+
+        </div>
+        <!-- /page content -->
+        {% include('layout/footer.html.twig') %}
+    </div>
+    <!-- /page container -->
+    {#</div>
+    </div>#}
+{% endblock %}

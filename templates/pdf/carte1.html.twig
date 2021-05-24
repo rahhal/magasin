@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>طباعة بطاقة مخزون</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style>
+        table {
+            font-family: xbriyaz, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td, th {
+            border: 1px solid #000;
+            text-align: left;
+            padding: 8px;
+        }
+        .flotte {
+            float:right;
+        }
+    </style>
+</head>
+<body style="font-family:xbriyaz,sans-serif">
+{# {% include('pdf/header.html.twig') %} #}
+
+{#<img src="assets/images/logo.png" alt="logo.png"/>#}
+{# <h3 style="text-align: left; ">
+    التاريخ:
+    {{ "now"|date('d-m-Y') }}</h3> #}
+{#{% for stock in stocks %}
+    {% if loop.first %}
+        <h3 style="text-align: left"> التاريخ: {{ stock.date | date('d-m-Y')  }}</h3>
+    {% endif %}
+{% endfor %}#}
+<table >
+        <tr>
+        <td  style="border:0;text-align: right;">{% include('pdf/header.html.twig') %}</td>
+        <td  style="border:0;text-align: right;">
+                <table>
+                <tr><td  style="text-align: right;">عدد التدوين :</td></tr>
+                <tr> <td style="text-align: right;" >رقم المرجع :</td></tr>
+                <tr>  <td style="text-align: right;"> المخزون الادنى: {{ article.qteMin }}</td></tr>
+                </table>
+        </td></tr>
+ </table>   
+<h1 style="text-align: center; "> بطاقة مخزون</h1>
+<h3 style="text-align: center; ">رقم الرف ............................</h3>
+<br>
+<h3 style="text-align: right; "> نوع المادة:{{ article }}</h3>
+
+{#<p class="flotte">
+    <img src="{{ asset('assets/images/print1.png')}}" alt="">
+</p>#}
+
+<table class="table table-bordered">
+    <thead>
+    <tr >
+        <th colspan="5" style="text-align: center">{{ "الدخول"|trans }}</th>
+        <th colspan="4" style="text-align: center">{{ "الخروج"|trans }}</th>
+        <td rowspan="2" style="text-align: center">{{ "Reste"|trans }}</td>
+        <td rowspan="2" style="text-align: center">{{ "Remarques"|trans }}</td>
+    </tr>
+
+{#    <tbody>#}
+{#    {% for stock in stocks|sort|reverse %}#}
+        <tr>
+            <td style="text-align: center">{{ "عدد التسجيل"|trans }}</td>
+            <td style="text-align: center">{{ "Date"|trans }}</td>
+            <td style="text-align: center">{{ "Qte"|trans }}</td>
+            <td style="text-align: center">{{ "عدد وصل التسليم"|trans }}</td>
+            <td style="text-align: center">{{ "رقم الطلبية
+و تاريخها أو المصدر"|trans }}</td>
+            <td style="text-align: center">{{ "Date"|trans }}</td>
+            <td style="text-align: center">{{ "عدد وصل الخروج"|trans }}</td>
+            <td style="text-align: center">{{ "Qte"|trans }}</td>
+            <td style="text-align: center">{{ "Benificiaire"|trans }}</td>
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+{% for date in dates %}
+ {% for ligne_sortie in ligne_sorties|sort|reverse %}
+         {% set ds= ligne_sortie.sortie.date|date('Y-m-d') %}
+{% for ligne_entree in ligne_entrees|sort|reverse %}
+        {% set de = ligne_entree.entree.dateEntree|date('Y-m-d') %}
+{#    {% if loop.first %}#}
+   
+
+           
+            {% if date==de and date!= ds %}
+             <tr>
+                {% if loop.first %}
+                    <td style="text-align: center">{{ ligne_entree.entree.numEntree }}</td>
+                    <td style="text-align: center">{{ ligne_entree.entree.dateEntree ? ligne_entree.entree.dateEntree|date('Y-m-d') : '' }}</td>
+                    <td style="text-align: center">{{ ligne_entree.qteEntr }}</td>
+                    <td style="text-align: center">{{ ligne_entree.entree.reference }}</td>
+                    <td style="text-align: center">{{ ligne_entree.entree.numBc }}--{{ ligne_entree.entree.dateBc ? ligne_entree.entree.dateBc|date('Y-m-d') : '' }}</td>
+                    
+                    <td style="text-align: center"></td>
+                    <td style="text-align: center"></td>
+                    <td style="text-align: center"></td>
+                    <td style="text-align: center"></td>
+                    <td style="text-align: center">{{ ligne_entree.qteEntr }}</td>
+                    <td style="text-align: center">{{ ligne_entree.article.remarque }}</td>
+                {% endif %}
+             </tr> 
+                  {% elseif date!=de and date == ds  %}
+             <tr>
+                {% if loop.first %}
+                    <td style="text-align: center"></td>
+                    <td style="text-align: center"></td>
+                    <td style="text-align: center"></td>
+                    <td style="text-align: center"></td>
+                    <td style="text-align: center"></td>
+                    
+                 <td style="text-align: center">{{ ligne_sortie.sortie.date ? ligne_sortie.sortie.date|date('Y-m-d') : '' }}</td>
+                    <td style="text-align: center">{{ ligne_sortie.sortie.bonSortie }}</td>
+                    <td style="text-align: center">{{ ligne_sortie.qte }}</td>
+                    <td style="text-align: center">{{ ligne_sortie.sortie.benificiaire }}</td>
+                    <td style="text-align: center">{{ ligne_sortie.qte }}</td>
+                    <td style="text-align: center">{{ ligne_sortie.article.remarque }}</td>
+                    {% endif %}
+             </tr> 
+                 {% elseif date == de and date == ds  %}
+             <tr>
+                {# {% if loop.first %} #}
+                    <td style="text-align: center">{{ ligne_entree.entree.numEntree }}</td>
+                    <td style="text-align: center">{{ ligne_entree.entree.dateEntree ? ligne_entree.entree.dateEntree|date('Y-m-d') : '' }}</td>
+                    <td style="text-align: center">{{ ligne_entree.qteEntr }}</td>
+                    <td style="text-align: center">{{ ligne_entree.entree.reference }}</td>
+                    <td style="text-align: center">{{ ligne_entree.entree.numBc }}-- {{ ligne_entree.entree.dateBc ? ligne_entree.entree.dateBc|date('Y-m-d') : '' }}</td>
+                    
+                    <td style="text-align: center">{{ ligne_sortie.sortie.date ? ligne_sortie.sortie.date|date('Y-m-d') : '' }}</td>
+                    <td style="text-align: center">{{ ligne_sortie.sortie.bonSortie }}</td>
+                    <td style="text-align: center">{{ ligne_sortie.qte }}</td>
+                    <td style="text-align: center">{{ ligne_sortie.sortie.benificiaire }}</td>
+                    <td style="text-align: center">{{ ligne_entree.qteEntr - ligne_sortie.qte }}</td>
+                    <td style="text-align: center">{{ ligne_sortie.article.remarque }}</td>
+                {# {% endif %} #}
+                </tr>
+             {% endif %}  
+             {# {% endif %} #}
+    {% endfor %}
+{% endfor %}
+{% endfor %}
+
+
+
+
+
+
+{# {% for ligne_entree in ligne_entrees %}
+{#    {% if loop.first %}#}
+   {# {% for ligne_sortie in ligne_sorties %}
+
+    {% set de = ligne_entree.entree.dateEntree|date('Y-m-d') %}
+    {% set ds= ligne_sortie.sortie.date|date('Y-m-d') %}
+
+     {#{% for entree in entrees|sort|reverse %}#}
+         {#   {% if de is defined and ds is defined and de == ds  %}
+                <tr>
+                {% if loop.first %}
+                    <td style="text-align: center">{{ ligne_entree.entree.numEntree }}</td>
+                    <td style="text-align: center">{{ ligne_entree.entree.dateEntree ? ligne_entree.entree.dateEntree|date('Y-m-d') : '' }}</td>
+                    <td style="text-align: center">{{ ligne_entree.qteEntr }}</td>
+                    <td style="text-align: center">{{ ligne_entree.entree.reference }}</td>
+                    <td style="text-align: center">{{ ligne_entree.entree.numBc }}</td>
+                    
+                    <td style="text-align: center">{{ ligne_sortie.sortie.date ? ligne_sortie.sortie.date|date('Y-m-d') : '' }}</td>
+                    <td style="text-align: center">{{ ligne_sortie.sortie.bonSortie }}</td>
+                    <td style="text-align: center">{{ ligne_sortie.qte }}</td>
+                    <td style="text-align: center">{{ ligne_sortie.sortie.benificiaire }}</td>
+                    <td style="text-align: center">{{ ligne_entree.qteEntr - ligne_sortie.qte }}</td>
+                    <td style="text-align: center"></td>
+                    {% endif %}
+                </tr>
+            {% elseif de is defined or ds is defined  %}
+            {% if de is defined %}
+             <tr>
+                {% if loop.first %}
+                    <td style="text-align: center">{{ ligne_entree.entree.numEntree }}</td>
+                    <td style="text-align: center">{{ ligne_entree.entree.dateEntree ? ligne_entree.entree.dateEntree|date('Y-m-d') : '' }}</td>
+                    <td style="text-align: center">{{ ligne_entree.qteEntr }}</td>
+                    <td style="text-align: center">{{ ligne_entree.entree.reference }}</td>
+                    <td style="text-align: center">{{ ligne_entree.entree.numBc }}</td>
+                    
+                    <td style="text-align: center"></td>
+                    <td style="text-align: center"></td>
+                    <td style="text-align: center"></td>
+                    <td style="text-align: center"></td>
+                    <td style="text-align: center">{{ ligne_entree.qteEntr }}</td>
+                    <td style="text-align: center"></td>
+                {% endif %}
+             </tr>
+                 {% elseif ds is defined  %}
+             <tr>
+                {% if loop.first %}
+                    <td style="text-align: center"></td>
+                    <td style="text-align: center"></td>
+                    <td style="text-align: center"></td>
+                    <td style="text-align: center"></td>
+                    <td style="text-align: center"></td>
+                    
+                 <td style="text-align: center">{{ ligne_sortie.sortie.date ? ligne_sortie.sortie.date|date('Y-m-d') : '' }}</td>
+                    <td style="text-align: center">{{ ligne_sortie.sortie.bonSortie }}</td>
+                    <td style="text-align: center">{{ ligne_sortie.qte }}</td>
+                    <td style="text-align: center">{{ ligne_sortie.sortie.benificiaire }}</td>
+                    <td style="text-align: center">{{ ligne_sortie.qte }}</td>
+                    <td style="text-align: center"></td>
+                    {% endif %}
+                </tr>
+            {% endif %} 
+            {% endif %}
+    {% endfor %}
+{% endfor %}
+ #}
+
+    </tbody>
+</table>
+</body>
+</html>

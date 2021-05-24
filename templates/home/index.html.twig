@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+ {% block title %} {{ app.user.email|upper }} {% endblock %}
+{% block body_class %} class="nav-md" {% endblock %}
+{% block body %}
+{#<div class="layout-boxed navbar-top">#}
+
+         {% include('layout/navbar.html.twig') %}
+    <!-- Page container -->
+    <div class="page-container">
+        {% include('layout/content.html.twig') %}
+        {% include('layout/footer.html.twig') %}
+</div>
+    <!-- /page container -->
+{#</div>#}
+{% endblock %}

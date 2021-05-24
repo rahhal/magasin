@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>وصل دخول</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style>
+        table {
+            font-family: xbriyaz, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td, th {
+            border: 1px solid #000;
+            text-align: left;
+            padding: 8px;
+        }
+    .tab tr td{
+        font-family: xbriyaz, sans-serif;
+        font-size: xx-large;
+        width: 100%;
+        border: none;
+         }
+    </style>
+</head>
+<body style="font-family:xbriyaz,sans-serif">
+{% include('pdf/header.html.twig') %}
+
+{% for entree in entrees %}
+
+    <h3 style="text-align: left; "> التاريخ:{{ entree.dateEntree ? entree.dateEntree|date('Y-m-d') : '' }}</h3>
+{% endfor %}
+
+<h1 style="text-align: center; "> وصل دخول</h1>
+<br>
+<br>
+<table class="tab">
+{% for entree in entrees %}
+    <tr>
+        <td style="text-align: right"> المزود: {{ entree.fournisseur }} </td>
+        <td style="text-align: right"> وصل دخول عدد: {{ entree.numEntree }}</td>
+    </tr>
+    <tr>
+        <td style="text-align: right">رقم الطلبية و تاريخها: {{ entree.numBc }} &nbsp;{{ entree.dateBc ? entree.dateBc|date('Y-m-d') : '' }}</td>
+        <td style="text-align: right">رقم وصل التسليم: {{ entree.numBc }}</td>
+    </tr>
+{% endfor  %}
+</table>
+<br>
+
+<table >
+    <thead>
+        <tr >
+            <th style="text-align: center">{{ "Article"|trans }}</th>
+            <th style="text-align: center">{{ "Qte entr"|trans }}</th>
+            <th style="text-align: center">{{ "Numero bon commande"|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+            {% for ligne_entree in ligne_entrees %}
+                <tr>
+                    <td style="text-align: center">{{ ligne_entree.article }}</td>
+                    <td style="text-align: center">{{ ligne_entree.qteEntr }}</td>
+                    <td style="text-align: center">{{ ligne_entree.entree.numBc }}</td>
+                </tr>
+
+            {% endfor %}
+
+    </tbody>
+</table>
+<br>
+    <table class="tab">
+        <tr>
+            <td style="text-align: right"><h3>حافظ المغازة</h3></td>
+                 <td style="text-align: center;"><h3>المدير</h3></td>
+        </tr>
+        {% for vb in societe %}
+
+            {% if loop.first %}
+                    <tr>
+                        <td style="text-align: right">{{ vb.magasinier }}</td>
+                        <td style="text-align: center;">{{ vb.directeur }}</td>
+                    </tr>
+             {% endif %}
+        {% endfor %}
+    </table>
+</body>
+</html>

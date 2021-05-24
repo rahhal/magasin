@@ -1,0 +1,256 @@
+
+{% extends 'base.html.twig' %}
+
+{# {% block title %} {{ app.user.email|upper }} {% endblock %} #}
+{% block body_class %} class="nav-md" {% endblock %}
+{% block body %}
+
+    {#<div class="layout-boxed navbar-top">#}
+    {% include('layout/navbar.html.twig') %}
+    <!-- Page container -->
+    <div class="page-container">
+        <!-- Page content -->
+        <div class="page-content">
+            <!-- Main content -->
+            <div class="content-wrapper">
+                <!-- Page header -->
+                <div class="col-md-12">
+                    <div class="page-header page-header-default">
+                        <div class="page-header-content">
+                            <div class="page-title">
+
+                            </div>
+                        </div>
+                        <div class="breadcrumb-line">
+                            <ul class="breadcrumb">
+                                <li><a href="#"><i class="icon-home2 position-left"></i> الملف</a></li>
+                                <li class="active">جرد المخزون</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /page header -->
+                <!-- Content area -->
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="col-md-12">
+
+                            <!-- Basic layout-->
+                            <div class="panel panel-flat">
+                                <div class="panel-heading">
+                                    <h1 class="panel-title">{{ "New inventaire"|trans }}</h1>
+                                    <div class="heading-elements">
+                                        <ul class="icons-list">
+                                            <li><a data-action="collapse"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <hr>
+
+                                <div class="panel-body">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <th>{{ "Date"|trans }}</th>
+                                            <td>{{ inventaire.date ? inventaire.date|date('Y-m-d') : '' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>{{ "Num inv"|trans }}</th>
+                                            <td>{{ inventaire.numInv }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <hr>
+                                    <div class="form-group">
+                                        <div class="text-right">
+                                            <a href="{{ path('inventaire_new') }}" class="btn btn-default"><i class="glyphicon glyphicon-arrow-right" style="margin-left: 1rem"></i>{{ "back to list"|trans }}</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    {#{{ form_end(form) }}#}
+
+                                </div>
+                            </div>
+                            <!-- /basic layout -->
+                        </div>
+                        <div class="col-md-12">
+                            <div class="panel">
+
+                                <div class="content">
+                                    <div class="row">
+
+                                        <!-- Basic layout-->
+                                        <div class="panel panel-flat">
+                                            <div class="panel-heading">
+                                                <h1 class="panel-title">{{ "Info inventaire"|trans }}</h1>
+                                                <div class="heading-elements">
+                                                    <ul class="icons-list">
+                                                        <li><a data-action="collapse"></a></li>
+                                                    </ul>
+                                                </div>
+                                                {% include('layout/flash-messages.html.twig') %}
+                                            </div>
+                                            <hr>
+                                            <div class="panel-body">
+
+                                                <div class="col-md-6">
+                                                    {{ form_start(form, {'attr': {'class': 'form-horizontal form-label-left'}}) }}
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 control-label">{{ "Article"|trans }}</label>
+                                                        <div class="col-lg-6">
+                                                            {{ form_widget(form.article,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 control-label">{{ "Qte inv"|trans }}</label>
+                                                        <div class="col-lg-6">
+                                                            {{ form_widget(form.qteInv,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 control-label">{{ "Qte stck"|trans }}</label>
+                                                        <div class="col-lg-6">
+                                                            {{ form_widget(form.stock,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                        </div>
+                                                    </div>
+
+                                                    <hr>
+                                                    <div class="form-group">
+                                                        {{ include('ligne_inventaire/_form.html.twig') }}
+                                                    </div>
+                                                    {{ form_end(form) }}
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                        <tr class="bg-orange-800">
+                                                            <th>{{ "Article"|trans }}</th>
+                                                            <th>{{ "Qte inv"|trans }}</th>
+                                                            <th></th>
+                                                            {# <th class="text-right">
+                                                                 <a href="{{ path('entree_show',{'id': entree.id}) }}" class="btn btn-success btn-rounded">
+                                                                     <i class="glyphicon  glyphicon-plus" style="margin-left: 1rem"></i>{{ "Create new Article"|trans }} </a>
+                                                             </th>#}
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for ligne_inventaire in inventaire.ligneInventaires %}
+                                                            <tr>
+                                                                <td>{{ ligne_inventaire.article }}</td>
+                                                                <td>{{ ligne_inventaire.qteinv }}</td>
+                                                                <td>
+                                                                    {# <a href="{{ path('entree_show', {'id': entree.id}) }}" class="btn btn-default btn-rounded"><i class="glyphicon  glyphicon-search"></i>
+                                                                         {{ "show"|trans }}
+                                                                     </a>#}
+                                                                    <a href="{{ path('ligne_inventaire_edit', {'id': ligne_inventaire.id}) }}" class="btn btn-primary btn-rounded"><i class="glyphicon  glyphicon-edit" style="margin-left: 1rem"></i>
+                                                                        {{ "edit"|trans }}
+                                                                    </a>
+                                                                    {# <a href="{{ path('entree_show', {'id': entree.id}) }}" class="btn btn-primary btn-rounded"><i class="glyphicon  glyphicon-edit" style="margin-left: 1rem"></i>
+                                                                         {{ "edit"|trans }}
+                                                                     </a>#}
+                                                                    <a href="{{ path('ligne_inventaire_delete', {'id': ligne_inventaire.id}) }}" class="btn btn-danger btn-rounded"><i class="glyphicon  glyphicon-trash" style="margin-left: 1rem"></i>
+                                                                        {{ "Delete"|trans }}
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+
+                                                        {% else %}
+                                                            <tr class="text-center">
+                                                                <td colspan="3">{{ "no records found"|trans }}</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /Basic layout-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /content area -->
+                        </div>
+                        <!-- /main content -->
+
+                    </div>
+                    <!-- /page content -->
+                    {% include('layout/footer.html.twig') %}
+                </div>
+                <!-- /page container -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {#<script>
+        $('#article').change(function () {
+            var articleSelector = $(this);
+            
+            // Request the neighborhoods of the selected city.
+            $.ajax({
+                url: "{{ path('listStocksOfArticle') }}",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    id: articleSelector.val()
+                },
+                success: function (stocks) {
+                    var stockSelect = $("#stock");
+
+                    // Remove current options
+                    stockSelect.html('');
+                    
+                    // Empty value ...
+                    stockSelect.append('<option value> Select a stock of ' + articleSelector.find("option:selected").text() + ' ...</option>');
+                    
+                    
+                    $.each(stocks, function (key, stock) {
+                         stockSelect.append('<option value="' + stock.id + '">' + stock.qte + '</option>');
+                      //  stockSelect.append('<option value="' + stock.qe + '"></option>');
+
+                    });
+                },
+                error: function (err) {
+                    alert("An error ocurred while loading data ...");
+                }
+            });
+        });
+    </script>#}
+    <script>
+        $('#article').change(function () {
+            var articleSelector = $(this);
+
+            // Request the neighborhoods of the selected city.
+            $.ajax({
+                url: "{{ path('ligne_inventaire_list_stocks') }}",
+                type: "GET",
+                dataType: "JSON",
+                data: {
+                    articleid: articleSelector.val()
+                },
+                success: function (stocks) {
+                    var stockSelect = $("#stock");
+
+                    // Remove current options
+                    stockSelect.html('');
+
+                    // Empty value ...
+                   // stockSelect.append('<option value> Select a stock of ' + articleSelector.find("option:selected").text() + ' ...</option>');
+
+
+                    $.each(stocks, function (key, stock) {
+                        stockSelect.append('<option value="' + stock.id + '">' + stock.qte + '</option>');
+                    });
+                },
+                error: function (err) {
+                    alert("An error ocurred while loading data ...");
+                }
+            });
+        });
+    </script>
+{% endblock %}

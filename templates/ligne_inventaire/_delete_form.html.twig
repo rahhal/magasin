@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('ligne_inventaire_delete', {'id': ligne_inventaire.id}) }}" onsubmit="return confirm('هل ترغب حقا في حذف هذا العنصر؟');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ligne_inventaire.id) }}">
+    <button class="btn">Delete</button>
+</form>

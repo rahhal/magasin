@@ -1,0 +1,277 @@
+{% macro btnDelete(id,label) %}
+    {% if is_granted('ROLE_DELETE') or is_granted('ROLE_ADMIN') %}
+
+    {% endif %}
+    <li><a class="delete-item" data-item="{{ id }}" href="javascript:void(0)"><i class="icon-cross2"></i> {{ label?label:"حذف"|trans }}</a></li>
+{% endmacro %}
+{% macro btnEdit(path,label) %}
+    {% if is_granted('ROLE_EDIT') or is_granted('ROLE_ADMIN') %}
+
+    {% endif %}
+    <li><a href="{{ path }}"><i class="icon-pencil7"></i> {{ label?label:"تغيير"|trans }}</a></li>
+{% endmacro %}
+{% macro btnHistory(path) %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <li><a href="{{ path }}"><i class="icon-pencil7"></i> {{ "Historique"|trans }}</a></li>
+    {% endif %}
+{% endmacro %}
+{% macro text(class,label,name,value=null,required=true) %}
+    <div class="{{ class }}">
+        <div class="form-group">
+            {% if label is not null %}
+                <label class="control-label">
+                    {{ label|raw }} {% if required==true %}<span class="symbol required"></span>{% endif %}
+                </label>
+            {% endif %}
+            <input type="text" name="{{ name }}" value="{{ value }}" class="form-control ">
+        </div>
+    </div>
+{% endmacro %}
+{% macro file(class,label,from,required) %}
+    <div class="{{ class }}">
+        <div class="form-group">
+            <label class="control-label">
+                {{ label }} {% if required==true %}<span class="symbol required"></span>{% endif %}
+            </label>
+            <div class="fileupload fileupload-new" data-provides="fileupload">
+                <div class="input-group">
+                    <div class="form-control uneditable-input">
+                        <i class="fa fa-file fileupload-exists"></i>
+                        <span class="fileupload-preview"></span>
+                    </div>
+                    <div class="input-group-btn">
+                        <div class="btn btn-light-grey btn-file">
+                            <span class="fileupload-new"><i class="fa fa-folder-open-o"></i> Select file</span>
+                            <span class="fileupload-exists"><i class="fa fa-folder-open-o"></i> Change</span>
+                            {{ form_widget(from) | raw }}
+                            {{ form_errors(from) | raw }}
+                        </div>
+                        <a href="#" class="btn btn-light-grey fileupload-exists" data-dismiss="fileupload">
+                            <i class="fa fa-times"></i> Remove
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+{% macro read_only(class,label,from,required) %}
+    <div class="{{ class }}">
+        <div class="form-group">
+            <label class="control-label">
+                {{ label }} {% if required==true %}<span class="symbol required"></span>{% endif %}
+            </label>
+            {{ form_widget(from, { 'attr':{'readonly':'readonly'} }) | raw }}
+            {{ form_errors(from) | raw }}
+        </div>
+    </div>
+{% endmacro %}
+{% macro input(class,label,from,required,attr={},smallText=null) %}
+    {% if not attr.class is defined %}
+        {% set attr = attr|merge({'class':'form-control'}) %}
+    {% endif %}
+    <div class="{{ class }}">
+        <div class="form-group">
+            <label class="control-label">{{ label|raw }}{% if required==true %} <span class="symbol required"></span>{% endif %}: </label>
+            {{ form_widget(from,{'attr':attr}) }}
+            {{ form_errors(from) | raw }}
+            {% if smallText is not null %}
+                <small class="help-block">{{ smallText }}</small>
+            {% endif %}
+        </div>
+    </div>
+
+
+    {#<div class="{{ class }}">
+        <div class="form-group">
+            {% if label is not null %}
+                <label class="control-label">
+                    {{ label|raw }} {% if required==true %}<span class="symbol required"></span>{% endif %}
+                </label>
+            {% endif %}
+            {% if value is null %}
+                {{ form_widget(from) | raw }}
+            {% else %}
+                {{ form_widget(from,{'attr':{'value':value}}) | raw }}
+            {% endif %}
+            {{ form_errors(from) | raw }}
+            {% if smallText is not null %}
+                <small>{{ smallText }}</small>
+            {% endif %}
+        </div>
+    </div>#}
+{% endmacro %}
+{% macro select2(class,label,from,required) %}
+    <div class="{{ class }}">
+        <div class="form-group">
+            {% if label is not null %}
+                <label class="control-label">
+                    {{ label|raw }} {% if required==true %}<span class="symbol required"></span>{% endif %}
+                </label>
+            {% endif %}
+            {{ form_widget(from, {'attr': {'class': 'select-search'}}) }}
+            {{ form_errors(from) | raw }}
+        </div>
+    </div>
+{% endmacro %}
+{% macro submit(label,load_ajax=false) %}
+    <hr>
+    <div class="row">
+        <div class="col-md-8">
+            <p>
+                <span class="symbol required"></span>Champs obligatoires
+            </p>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-primary btn-block" type="submit">
+                {% if load_ajax %}
+                    <i class="icon-spinner2 spinner hidden" id="load-submit"></i>
+                {% endif %}
+                {{ label }} <i class="fa fa-arrow-circle-right"></i>
+            </button>
+        </div>
+    </div>
+{% endmacro %}
+{% macro submit2(name,value,class) %}
+    <div class="{{ class }}">
+        <input class="btn btn-green btn-block" name="{{ name }}" value="{{ value }}" type="submit"/>
+    </div>
+{% endmacro %}
+
+{% macro htmlInput(class,label,name,required=false,placeholder=null) %}
+    <div class="{{ class }}">
+        <div class="form-group">
+            {% if label is not null %}
+                <label class="control-label">
+                    {{ label|raw }} {% if required %}<span class="symbol required"></span>{% endif %}
+                </label>
+            {% endif %}
+            <input type="text" name="{{ name }}" class="form-control" {% if required %}required{% endif %}
+                   placeholder="{{ placeholder }}">
+        </div>
+    </div>
+{% endmacro %}
+{% macro htmlDate(class,label,name,required=false,placeholder=null) %}
+    <div class="{{ class }}">
+        <div class="form-group">
+            {% if label is not null %}
+                <label class="control-label">
+                    {{ label|raw }} {% if required %}<span class="symbol required"></span>{% endif %}
+                </label>
+            {% endif %}
+            <input type="date" name="{{ name }}" class="form-control" {% if required %}required{% endif %}
+                   placeholder="{{ placeholder }}">
+        </div>
+    </div>
+{% endmacro %}
+{% macro checkbox(class,label,from,required) %}
+    <div class="{{ class }}">
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+
+                    {{ form_widget(from, {'attr': {'class': 'styled'}}) }}
+                    {{ form_errors(from) | raw }}
+                    {% if label is not null %}
+                        <label>
+                            {{ label|raw }} {% if required==true %}<span class="text-danger">*</span>{% endif %}
+                        </label>
+                    {% endif %}
+                </label>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+{% macro uploadImage(class,label,form,plusieur=false,type_image,required,smallText=null) %}
+
+    {% set entity=form.vars.value %}
+
+    {% if type_image is null %}
+        {% if not plusieur %}
+            {% set type_image='profil' %}
+        {% else %}
+            {% set type_image='galerie' %}
+        {% endif %}
+    {% endif %}
+
+    <div class="{{ class }}">
+        <div class="form-group">
+            {% if label is not null %}
+                <label class="control-label">
+                    {{ label|raw }} {% if required==true %}<span class="symbol required"></span>{% endif %}
+                </label>
+            {% endif %}
+
+            {% if not plusieur %}
+                {% set image = entity.images[type_image] is defined ? entity.images[type_image] : null %}
+                <section>
+                    <div class="image form-group text-center">
+                        <div class="thumbnail thumbnail-">
+                            <img src="{{ asset(image?image.src:'plus.png') }}"
+                                 class="{{ image?'':'file-Select opacity' }} image-uploaded img-rounded">
+                            <div class="caption caption_">
+                                <button type="button"
+                                        class="btn btn-xs btn-default btn-danger del-image {% if not image %}hidden{% endif %}"
+                                        src-img-plus="{{ asset('plus.png') }}"><i
+                                            class="fa fa-remove"></i>
+                                </button>
+                                {% if image %}
+                                    <input type="hidden" id="deleteimg" name="images-delete[{{ type_image }}]" value="">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <input class="file-Elem hidden" type="file" class="hidden"
+                               name="images[{{ type_image }}]"/>
+                    </div>
+                </section>
+            {% else %}
+                <section>
+                    <div class="images {{ type_image }}" data-type="{{ type_image }}">
+                        {% if entity.images[type_image] is defined %}
+                            {% for image in entity.images[type_image] %}
+                                <div id="{{ type_image ~ loop.index }}">
+                                    <div class="thumbnail thumbnail_">
+                                        <img src="{{ asset(image.src) }}" class="image-uploaded img-rounded">
+                                        <div class="caption caption_">
+                                            <button data-id="{{ type_image ~ loop.index }}" type="button"
+                                                    class="btn btn-xs btn-default btn-danger del-image"><i
+                                                        class="fa fa-remove"></i>
+                                            </button>
+                                            <input type="hidden" id="deleteimg"
+                                                   name="images-delete[{{ type_image }}][]" value="">
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <div id="image_preview">
+                            <div class="thumbnail thumbnail_">
+                                <img src="{{ asset('plus.png') }}"
+                                     class="file-Select image-uploaded img-rounded opacity">
+                                <div class="caption caption_">
+                                    <button data-id="0" type="button"
+                                            class="btn btn-xs btn-default btn-danger del-image hidden"><i
+                                                class="fa fa-remove"></i>
+                                    </button>
+                                </div>
+                                <input type="file" class="file-Elem hidden" name="">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            {% endif %}
+
+            {% if smallText is not null %}
+                <small>{{ smallText }}</small>
+            {% endif %}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro checkbox_switch(from,val1,val2) %}
+    <div class="checkbox checkbox-switch">
+        <label>
+            {{ form_widget(from, {'attr': {'class': 'switch','data-on-color':'success','data-off-color':'danger','data-size':'mini','data-on-text':val1,'data-off-text':val2}}) }}
+        </label>
+    </div>
+{% endmacro %}

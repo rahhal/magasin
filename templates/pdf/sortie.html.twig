@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>وصل خروج</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style>
+        table {
+            font-family: xbriyaz, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td, th {
+            border: 1px solid #000;
+            text-align: left;
+            padding: 8px;
+        }
+        .tab tr td{
+            font-family: xbriyaz, sans-serif;
+            font-size: large;
+            /*width: 100%;*/
+            border: none;
+        }
+    </style>
+</head>
+<body style="font-family:xbriyaz,sans-serif">
+{% include('pdf/header.html.twig') %}
+
+{% for sortie in sorties %}
+
+    <h3 style="text-align: left; "> التاريخ:{{ sortie.date ? sortie.date|date('Y-m-d') : '' }}</h3>
+{% endfor %}
+
+<h1 style="text-align: center; "> وصل خروج</h1>
+<br>
+<br>
+
+{#<table class="tab">#}
+    {% for sortie in sorties %}
+        {#<tr>
+            <td style="text-align: right"><h3>المستفيد:</h3>  {{ sortie.benificiaire }} </td>
+            <td style="text-align: right"> {{ "Bon sortie"|trans }} {{ sortie.bonSortie }}</td>
+        </tr>
+        <tr>
+            <td style="text-align: right">رقم الطلبية و تاريخها: {{ sortie.num }} &nbsp;{{ sortie.date ? sortie.date|date('Y-m-d') : '' }}</td>
+            <td style="text-align: right">رقم وصل التسليم: {{ sortie.num }}</td>
+        </tr>#}
+        <tr>
+            {#<td style="text-align: right"><h3>المستفيد:</h3>   </td>
+            <td style="text-align: right"> {{ sortie.benificiaire }} </td>
+            <td></td>
+            <td> </td>#}
+            {#<td style="text-align: right"><h3> {{ "Bon sortie"|trans }} </h3></td>
+            <td style="text-align: right">  {{ sortie.bonSortie }}</td>#}
+            {#<td></td>
+            <td> </td>#}
+
+        </tr>
+        {#<tr>
+            <td style="text-align: right"><h3>رقم الطلبية و تاريخها:</h3> </td>
+
+            <td style="text-align: right">{{ sortie.num }} &nbsp;{{ sortie.date ? sortie.date|date('Y-m-d') : '' }}</td>
+            <td></td>
+            <td> </td>
+            <td style="text-align: right"><h3>رقم وصل التسليم: </h3></td>
+            <td style="text-align: right"> {{ sortie.num }}</td>
+
+        </tr>#}
+         {{ "Bon sortie"|trans }} {{ sortie.bonSortie }}
+
+    {% endfor  %}
+{#</table>#}
+<br>
+<br>
+<br>
+<table >
+    <thead>
+    <tr >
+        <th style="text-align: center">{{ "Article"|trans }}</th>
+        <th style="text-align: center">{{ "Qte"|trans }}</th>
+{#        <th style="text-align: center">{{ "Num"|trans }}</th>#}
+    </tr>
+    </thead>
+    <tbody>
+    {% for ligne_sortie in ligne_sorties %}
+        <tr>
+            <td style="text-align: center">{{ ligne_sortie.article }}</td>
+            <td style="text-align: center">{{ ligne_sortie.qte }}</td>
+{#            <td style="text-align: center">{{ ligne_sortie.num }}</td>#}
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+</table>
+<br>
+<table class="tab">
+    <tr>
+        <td style="text-align: right"><h3>امضاء المستفيد</h3></td>
+        <td style="text-align: right"><h3>حافظ المغازة</h3></td>
+        <td style="text-align: center;"><h3>المدير</h3></td>
+    </tr>
+    {% for vb in societe %}
+
+        {% if loop.first %}
+            <tr>
+                {% for sortie in sorties %}
+                     <td style="text-align: right">{{ sortie.benificiaire }}</td>
+                {% endfor %}
+                <td style="text-align: right">{{ vb.magasinier }}</td>
+                <td style="text-align: center;">{{ vb.directeur }}</td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+</table>
+</body>
+</html>

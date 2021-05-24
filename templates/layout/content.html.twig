@@ -1,0 +1,240 @@
+
+{% if is_granted('ROLE_ENTREPRISE') %}
+{#{% if is_granted('ROLE_SUPER_ADMIN') %}#}
+
+    <!-- Page content -->
+    <div class="page-content">
+
+        <!-- Main content -->
+        <div class="content-wrapper">
+
+            <!-- Page header -->
+            <div class="page-header page-header-default">
+                <div class="page-header-content">
+                    <div class="page-title">
+                        {# <h4><i class="icon-arrow-right6 position-left"></i>  #}
+                        {# <span class="text-semibold">Home</span> - Dashboard</h4> #}
+                    </div>
+
+                    {# <div class="heading-elements">
+                        <form class="heading-form" action="#">
+                            <div class="form-group">
+                                {# <div class="daterange-custom" id="reportrange">
+                                    <div class="daterange-custom-display"></div>
+                                    <span class="badge bg-danger-400">24</span>
+                                </div> #}
+                           {# </div>
+                        </form>
+                    </div> #}
+                </div>
+
+                <div class="breadcrumb-line">
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="icon-home2 position-left"></i> الصفحة الرئيسية</a></li>
+                        <li class="active">منظومة المغازة</li>
+                    </ul>
+
+                </div>
+            </div>
+            <!-- /page header -->
+
+            <!-- Content area -->
+
+                <!-- Traffic sources -->
+            <div class="col-md-12">
+                <div class="panel">
+                <div class="panel panel-flat">
+                    <div class="panel-heading">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                            </ol>
+                            <div class="carousel-inner" role="listbox">
+                                <div class="item">
+                                    <img src="{{ asset('assets/images/dip.png')}}" alt="Third slide" style=" width : auto; margin-left: auto; margin-right: auto; display: block;">
+                                </div>
+                                <div class="item">
+                                    <img src="{{ asset('assets/images/6.png')}}" alt="Third slide" style=" width : auto; margin-left: auto; margin-right: auto; display: block;">
+                                </div>
+                                <div class="item">
+                                    <img src="{{ asset('assets/images/stat6.png')}}" alt="Second slide" style="; width : auto; margin-left: auto; margin-right: auto; display: block;">
+                                </div>
+
+                                <div class="item active">
+                                    <img src="{{ asset('assets/images/logo6.png')}}" alt="Forth slide" style=" width : auto; margin-left: auto; margin-right: auto; display: block;">
+                                </div>
+                            </div>
+                            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <span class="sr-only">قبل</span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                <span class="sr-only">بعد</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                    <div class="col-md-12">
+                            <div class="panel">
+                                <div class="title">
+                                    <h1> &nbsp;&nbsp;&nbsp;منظومة المغازة </h1>
+                                    <hr>
+                                </div>
+                                <div class="content">
+                                    <div class="row">
+                                        <p>  تم تصميم برنامج  "منظومة المغازة" ليناسب كافة المؤسسات التربوية حيث يوفر البرنامج كثير من الوقت والمجهود ويعين صاحب المؤسسة على إدارة المشتريات, المبيعات, المخزون و الجرد بطريقة سهلة ومبوبة. </p>
+                                        <p> يحتوي  هذاالبرنامج على العديد من التقارير .يقوم بتوجيه المستعمل لتقليل الاخطاء البشرية الى اقل درجة اذ يقوم البرنامج بالتاثير فى كافة نواحى الحسابات تلقائيا. </p>
+                                        <p>يحتوى على تقارير مفصلة عنالمواد المستخدمة و اصنافها و انواعها,دخول و خروج المواد ، كمية المواد بالمخزون و معطيات الجرد مع توثيق التقارير اليومية بالنسخ.  </p>
+                                        <p><h2> العناصر الأساسية في البرنامج:</h2>  </p>
+                                        <p>   يتكون البرنامج من  محاور أساسية تتمثل في : </p>
+                                        <ul>
+                                            <li>	المعطيات العامة للمؤسسة</li>
+                                            <li>	إدارة المواد</li>
+                                            <li>	إدارة المشتريات</li>
+                                            <li>	إدارة المخزون</li>
+                                            <li>	إدارة خروج المواد</li>
+                                            <li>	إدارة الجرد</li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                </div>
+
+            </div>
+            <!-- /content area -->
+
+        </div>
+        <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+{% else %}
+    <!-- Page content -->
+    <div class="page-content">
+
+        <!-- Main content -->
+        <div class="content-wrapper">
+            <!-- Page header -->
+            <div class="page-header page-header-default">
+                <div class="page-header-content">
+                    <div class="page-title">
+                        {# <h4><i class="icon-arrow-right6 position-left"></i>  #}
+                        {# <span class="text-semibold">Home</span> - Dashboard</h4> #}
+                    </div>
+
+                    {# <div class="heading-elements">
+                        <form class="heading-form" action="#">
+                            <div class="form-group">
+                                {# <div class="daterange-custom" id="reportrange">
+                                    <div class="daterange-custom-display"></div>
+                                    <span class="badge bg-danger-400">24</span>
+                                </div> #}
+                    {# </div>
+                 </form>
+             </div> #}
+                </div>
+
+                <div class="breadcrumb-line">
+                    <ul class="breadcrumb">
+                        <li><a href="#"><i class="icon-home2 position-left"></i> الصفحة الرئيسية</a></li>
+                        <li class="active">منظومة المغازة</li>
+                    </ul>
+
+                </div>
+            </div>
+            <!-- /page header -->
+
+            <!-- Content area -->
+
+            <!-- Traffic sources -->
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel panel-flat">
+                        <div class="panel-heading">
+                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                                </ol>
+                                <div class="carousel-inner" role="listbox">
+                                    <div class="item">
+                                        <img src="{{ asset('assets/images/dip.png')}}" alt="Third slide" style=" width : auto; margin-left: auto; margin-right: auto; display: block;">
+                                    </div>
+                                    <div class="item">
+                                        <img src="{{ asset('assets/images/6.png')}}" alt="Third slide" style=" width : auto; margin-left: auto; margin-right: auto; display: block;">
+                                    </div>
+                                    <div class="item">
+                                        <img src="{{ asset('assets/images/stat6.png')}}" alt="Second slide" style="; width : auto; margin-left: auto; margin-right: auto; display: block;">
+                                    </div>
+
+                                    <div class="item active">
+                                        <img src="{{ asset('assets/images/logo6.png')}}" alt="Forth slide" style=" width : auto; margin-left: auto; margin-right: auto; display: block;">
+                                    </div>
+                                </div>
+                                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                    <span class="sr-only">قبل</span>
+                                </a>
+                                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                    <span class="sr-only">بعد</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <div class="panel">
+                            <div class="title">
+                                {#<h1> &nbsp;&nbsp;&nbsp;منظومة المغازة </h1>#}
+                                <hr>
+                            </div>
+                            <div class="content">
+                                {#<div class="row">
+                                    <p>  تم تصميم برنامج  "منظومة المغازة" ليناسب كافة المؤسسات التربوية حيث يوفر البرنامج كثير من الوقت والمجهود ويعين صاحب المؤسسة على إدارة المشتريات, المبيعات, المخزون و الجرد بطريقة سهلة ومبوبة. </p>
+                                    <p> يحتوي  هذاالبرنامج على العديد من التقارير .يقوم بتوجيه المستعمل لتقليل الاخطاء البشرية الى اقل درجة اذ يقوم البرنامج بالتاثير فى كافة نواحى الحسابات تلقائيا. </p>
+                                    <p>يحتوى على تقارير مفصلة عنالمواد المستخدمة و اصنافها و انواعها,دخول و خروج المواد ، كمية المواد بالمخزون و معطيات الجرد مع توثيق التقارير اليومية بالنسخ.  </p>
+                                    <p><h2> العناصر الأساسية في البرنامج:</h2>  </p>
+                                    <p>   يتكون البرنامج من  محاور أساسية تتمثل في : </p>
+                                    <ul>
+                                        <li>	المعطيات العامة للمؤسسة</li>
+                                        <li>	إدارة المواد</li>
+                                        <li>	إدارة المشتريات</li>
+                                        <li>	إدارة المخزون</li>
+                                        <li>	إدارة خروج المواد</li>
+                                        <li>	إدارة الجرد</li>
+
+                                    </ul>
+                                </div>#}
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <!-- /content area -->
+
+        </div>
+        <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+
+{% endif %}

@@ -1,0 +1,148 @@
+
+{% extends 'base.html.twig' %}
+
+{# {% block title %} {{ app.user.email|upper }} {% endblock %} #}
+{% block body_class %} class="nav-md" {% endblock %}
+{% block body %}
+
+    {#<div class="layout-boxed navbar-top">#}
+    {% include('layout/navbar.html.twig') %}
+    <!-- Page container -->
+    <div class="page-container">
+        <!-- Page content -->
+        <div class="page-content">
+            <!-- Main content -->
+            <div class="content-wrapper">
+                <!-- Page header -->
+                <div class="col-md-12">
+                    <div class="page-header page-header-default">
+                        <div class="page-header-content">
+                            <div class="page-title">
+
+                            </div>
+                        </div>
+                        <div class="breadcrumb-line">
+                            <ul class="breadcrumb">
+                                <li><a href="#"><i class="icon-home2 position-left"></i> الملف</a></li>
+                                <li class="active">جرد المخزون</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /page header -->
+                <!-- Content area -->
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="col-md-12">
+
+                            <!-- Basic layout-->
+                            <div class="panel panel-flat">
+                                <div class="panel-heading">
+                                    <h1 class="panel-title">{{ "New inventaire"|trans }}</h1>
+                                    <div class="heading-elements">
+                                        <ul class="icons-list">
+                                            <li><a data-action="collapse"></a></li>
+                                        </ul>
+                                    </div>
+                                    {% include('layout/flash-messages.html.twig') %}
+                                </div>
+                                <hr>
+
+                                <div class="panel-body">
+                                    {{ form_start(form, {'attr': {'class': 'form-horizontal form-label-left'}}) }}
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">{{ "Date"|trans }}</label>
+                                        <div class="col-lg-3">
+                                            {{ form_widget(form.date,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label" required="required">{{ "Num inv"|trans }} </label>
+
+                                        <div class="col-lg-6">
+                                            {{ form_widget(form.num_inv,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <div class="form-group">
+                                        {{ include('inventaire/_form.html.twig') }}
+                                    </div>
+                                    {{ form_end(form) }}
+                                    {# {{ form_widget(form._token) }}
+                                     {{ form_end(form, {'render_rest': false}) }}#}
+
+                                </div>
+                            </div>
+                            <!-- /basic layout -->
+                        </div>
+
+
+                        <!-- Basic layout-->
+
+
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="title">
+                                    <h1> &nbsp;{{ "Inventaire index"|trans }}&nbsp;&nbsp; </h1>
+                                    <hr>
+                                </div>
+                                <div class="content">
+                                    <div class="row">
+
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr class="bg-orange-800">
+                                                <th>{{ "Date"|trans }}</th>
+                                                <th>{{ "Num inv"|trans }}</th>
+                                                <th class="text-right">
+                                                    <a href="{{ path('inventaire_new') }}" class="btn btn-success btn-rounded">
+                                                        <i class="glyphicon  glyphicon-plus" style="margin-left: 1rem"></i>{{ "Create new inventaire"|trans }} </a>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for inventaire in inventaires %}
+                                                <tr>
+                                                    <td>{{ inventaire.date ? inventaire.date|date('Y-m-d') : '' }}</td>
+                                                    <td>{{ inventaire.numInv }}</td>
+                                                    <td>
+                                                        {# <a href="{{ path('entree_show', {'id': entree.id}) }}" class="btn btn-default btn-rounded"><i class="glyphicon  glyphicon-search"></i>
+                                                             {{ "show"|trans }}
+                                                         </a>#}
+                                                        <a href="{{ path('inventaire_edit', {'id': inventaire.id}) }}" class="btn btn-primary btn-rounded"><i class="glyphicon  glyphicon-edit" style="margin-left: 1rem"></i>
+                                                            {{ "edit"|trans }}
+                                                        </a>
+                                                        <a href="{{ path('inventaire_delete', {'id': inventaire.id}) }}" class="btn btn-danger btn-rounded"><i class="glyphicon  glyphicon-trash" style="margin-left: 1rem"></i>
+                                                            {{ "Delete"|trans }}
+                                                        </a>
+                                                    </td>
+                                                </tr>
+
+                                            {% else %}
+                                                <tr class="text-center">
+                                                    <td colspan="3">{{ "no records found"|trans }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /content area -->
+            </div>
+            <!-- /main content -->
+
+        </div>
+        <!-- /page content -->
+        {% include('layout/footer.html.twig') %}
+    </div>
+    <!-- /page container -->
+    {#</div>
+    </div>#}
+{% endblock %}

@@ -1,0 +1,110 @@
+
+{% extends 'base.html.twig' %}
+{# {% block title %} {{ app.user.email|upper }} {% endblock %} #}
+
+{% block body_class %} class="nav-md" {% endblock %}
+{% block body %}
+    {#<div class="layout-boxed navbar-top">#}
+    {% include('layout/navbar.html.twig') %}
+        <!-- Page container -->
+        <div class="page-container">
+            <!-- Page content -->
+            <div class="page-content">
+                <!-- Main content -->
+                <div class="content-wrapper">
+                    <!-- Page header -->
+                    <div class="col-md-12">
+                        <div class="page-header page-header-default">
+                            <div class="page-header-content">
+                                <div class="page-title">
+                                </div>
+                            </div>
+                            <div class="breadcrumb-line">
+                                <ul class="breadcrumb">
+                                    <li><a href="#"><i class="icon-home2 position-left"></i> الادارة</a></li>
+                                    <li class="active">المستخدمين</li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /page header -->
+                    <!-- Content area -->
+                    <div class="col-md-12">
+                        <div class="panel">
+
+                            <div class="col-md-12">
+                                <div class="panel">
+                                    <div class="title">
+                                        <h1> &nbsp;{{ "User index"|trans }}&nbsp;&nbsp; </h1>
+
+                                        <hr>
+                                    </div>
+                                    <div class="content">
+                                        <div class="row">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr class="bg-orange-800">
+                                                  <th>{{"Fullname"|trans}}</th>
+                                                {#<th>Roles</th>#}
+                                                <th>{{"Societe"|trans}}</th>
+                                                <th>{{"Rib"|trans}}</th>
+                                                <th>{{"Cin"|trans}}</th>
+                                                <th>{{"Tel"|trans}}</th>
+                                                <th>{{"Adresse"|trans}}</th>
+                                                <th>{{"Email"|trans}}</th>
+                                                <th>{{"Avatar"|trans}}</th>
+                                                <th class="text-right">
+                                                        <a href="{{ path('user_new') }}" class="btn btn-success btn-rounded">
+                                                            <i class="glyphicon  glyphicon-plus" style="margin-left: 1rem"></i>{{ "Create new user"|trans }} </a>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for user in users %}
+                                            <tr>
+                                                {#<td>{{ user.roles ? user.roles|json_encode : '' }}</td>#}
+                                                <td>{{ user.fullname }}</td>
+                                                <td>{{ user.societe }}</td>
+                                                <td>{{ user.rib }}</td>
+                                                <td>{{ user.cin }}</td>
+                                                <td>{{ user.tel }}</td>
+                                                <td>{{ user.adresse }}</td>
+                                                <td>{{ user.email }}</td>
+                                                <td><img src="{{ asset('uploads/icones/'~user.avatar) }}" class="img-circle img-sm"></td>    
+                                                     <td>       <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-primary btn-rounded"><i class="glyphicon  glyphicon-edit" style="margin-left: 1rem"></i>
+                                                                {{ "edit"|trans }}
+                                                            </a>
+                                                            <a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-danger btn-rounded"><i class="glyphicon  glyphicon-trash" style="margin-left: 1rem"></i>
+                                                                {{ "Delete"|trans }}
+                                                            </a>
+                                                            {# <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-default btn-rounded"><i class="glyphicon  glyphicon-search"></i>
+                                                                {{ "show"|trans }}
+                                                            </a>#}
+                                                        </td>
+                                                    </tr>
+                                                {% else %}
+                                                    <tr class="text-center">
+                                                        <td colspan="9">{{ "no records found"|trans }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /content area -->
+                </div>
+                <!-- /main content -->
+
+            </div>
+            <!-- /page content -->
+            {% include('layout/footer.html.twig') %}
+        </div>
+    <!-- /page container -->
+{% endblock %}

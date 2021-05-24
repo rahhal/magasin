@@ -1,0 +1,93 @@
+
+{% extends 'base.html.twig' %}
+
+{# {% block title %} {{ app.user.email|upper }} {% endblock %} #}
+{% block body_class %} class="nav-md" {% endblock %}
+{% block body %}
+
+    {#<div class="layout-boxed navbar-top">#}
+    {% include('layout/navbar.html.twig') %}
+    <!-- Page container -->
+    <div class="page-container">
+        <!-- Page content -->
+        <div class="page-content">
+            <!-- Main content -->
+            <div class="content-wrapper">
+                <!-- Page header -->
+                <div class="col-md-12">
+                    <div class="page-header page-header-default">
+                        <div class="page-header-content">
+                            <div class="page-title">
+
+                            </div>
+                        </div>
+                        <div class="breadcrumb-line">
+                            <ul class="breadcrumb">
+                                <li><a href="#"><i class="icon-home2 position-left"></i> المخزون</a></li>
+                                <li class="active"> المخزون الحالي</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /page header -->
+                <!-- Content area -->
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="title">
+                                    <h1> &nbsp;{{ "Stock index"|trans }}&nbsp;&nbsp; </h1>
+                                    <div class="text-right">
+                                    <a href="{{ path('stock_pdf')}}"  class="btn btn-primary btn-rounded text-right"><i class="glyphicon  glyphicon-print" style="margin-left: 1rem"></i>
+                                        {{ "print"|trans }} </a>
+                                    </div>
+                                    <hr>
+                                </div>
+                                <div class="content">
+                                    <div class="row">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr class="bg-orange-800">
+                                                {#<th>{{ "Date"|trans }}</th>#}
+                                                <th>{{ "Libele ar"|trans }}</th>
+                                                <th>{{ "Qte old"|trans }}</th>
+                                                <th>{{ "Qte en  stock"|trans }}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for stock in stocks|sort|reverse %}
+                                                <tr>
+                                                    {#<td>{{ stock.date ? stock.date|date('Y-m-d') : '' }}</td>#}
+                                                    <td>{{ stock.article }}</td>
+                                                    <td>{{ stock.qte }}</td>
+                                                    <td>{{ stock.qteReste }} </td>
+                                                </tr>
+                                            {% else %}
+                                                <tr class="text-center">
+                                                    <td colspan="3">{{ "no records found"|trans }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                       <br>
+                                        <div class="text-right" >
+                                            {{ knp_pagination_render(stocks) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /content area -->
+            </div>
+            <!-- /main content -->
+
+        </div>
+        <!-- /page content -->
+        {% include('layout/footer.html.twig') %}
+    </div>
+    <!-- /page container -->
+    {#</div>
+    </div>#}
+{% endblock %}

@@ -1,0 +1,64 @@
+
+<div class="row">
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h2 style="text-align: center; "> كمية خروج كل بضاعة في شهر:{{ month }}</h2>
+        </div>
+        {#<div class="card-body" style="text-align: right; ">
+            <h2>  {{ categorie }} :{{ "Categorie"|trans}}</h2>
+        </div>#}
+    </div>
+
+</div>
+
+<canvas id="myChart" width="70%" height="15" style="margin:45px 0 15px 0;"></canvas>
+{#{{ dump() }}#}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+
+    tabQtes ={{ ligneSorties|raw }}
+        tabArticles = {{ articles|raw }}
+
+            console.log("article=" +tabArticles);
+    console.log("qte=" +tabQtes);
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: tabArticles,
+            datasets: [{
+                label: 'الكمية',
+                data: tabQtes,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 5)',
+                    'rgba(54, 162, 235, 5)',
+                    'rgba(255, 206, 86, 5)',
+                    'rgba(75, 192, 192, 5)',
+                    'rgba(153, 102, 255, 5)',
+                    'rgba(255, 159, 64, 5)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 5)',
+                    'rgba(54, 162, 235, 5)',
+                    'rgba(255, 206, 86, 5)',
+                    'rgba(75, 192, 192, 5)',
+                    'rgba(153, 102, 255, 5)',
+                    'rgba(255, 159, 64, 5)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: false
+                    }
+                }]
+            }
+        }
+    });
+</script>

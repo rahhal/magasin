@@ -1,0 +1,156 @@
+
+{% extends 'base.html.twig' %}
+
+{# {% block title %} {{ app.user.email|upper }} {% endblock %} #}
+{% block body_class %} class="nav-md" {% endblock %}
+{% block body %}
+    {#<div class="layout-boxed navbar-top">#}
+        {% include('layout/navbar.html.twig') %}
+        <!-- Page container -->
+        <div class="page-container">
+
+            <!-- Page content -->
+            <div class="page-content">
+                <!-- Main content -->
+                <div class="content-wrapper">
+                    <!-- Page header -->
+                    <div class="page-header page-header-default">
+                        <div class="page-header-content">
+                            <div class="page-title">
+
+                            </div>
+                        </div>
+
+                        <div class="breadcrumb-line">
+                            <ul class="breadcrumb">
+                                <li><a href="#"><i class="icon-home2 position-left"></i> الملف</a></li>
+                                <li class="active">الصنف</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <!-- /page header -->
+                    <!-- Content area -->
+                    <div class="col-md-12">
+                        <div class="panel">
+                            <div class="col-md-12">
+
+                                <!-- Basic layout-->
+                                <div class="panel panel-flat">
+                                    <div class="panel-heading">
+                                        <h1 class="panel-title">{{ "Info Categorie"|trans }}</h1>
+                                        <div class="heading-elements">
+                                            <ul class="icons-list">
+                                                <li><a data-action="collapse"></a></li>
+                                            </ul>
+                                        </div>
+                                        {% include('layout/flash-messages.html.twig') %}
+                                    </div>
+                                    <hr>
+
+                                    <div class="panel-body">
+                                        {{ form_start(form, {'attr': {'class': 'form-horizontal form-label-left'}}) }}
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">{{ "Designation cat"|trans }}</label>
+                                            <div class="col-lg-6">
+                                                {{ form_widget(form.designation,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">{{ "Description"|trans }}</label>
+                                            <div class="col-lg-6">
+                                                {{ form_widget(form.description,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                            </div>
+                                        </div>
+
+                                        <hr>
+                                        <div class="form-group">
+                                            {{ include('categorie/_form.html.twig') }}
+                                        </div>
+                                        {{ form_end(form) }}
+
+                                    </div>
+                                </div>
+                                <!-- /basic layout -->
+
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="panel">
+                                    <div class="title">
+                                        <h1> &nbsp;{{ "Categorie index"|trans }}&nbsp;&nbsp; </h1>
+                                        <hr>
+                                    </div>
+                                    <div class="content">
+                                        <div class="row">
+
+                                            <table class="table table-bordered">
+                                            {#<table class="table datatable">#}
+                                                {#<table class="table table-responsive datatable-search-button-print-columns">#}
+                                                {#<table class="table datatable-basic table-bordered table-striped table-hover">#}
+                                            {# <div class="panel-body">
+                                                 <table class="table table-responsive datatable-search-button-print-columns">#}
+                                                    {#<table class="table datatable-basic table-bordered table-striped table-hover">#}
+
+                                                <thead>
+                                                <tr class="bg-orange-800">
+
+                                                    <th>{{ "Designation cat"|trans }}</th>
+                                                    {# <th{% if categories.isSorted('c.categorie') %} class="sorted" {% endif %}>
+                                                        {{ knp_pagination_sortable(categories, 'Designation cat'|trans, 'c.categorie')|raw }}</th>
+                                                    #}
+                                                    <th>{{ "Description"|trans }}</th>
+                                                    <th class="text-right">
+                                                        <a href="{{ path('categorie_new') }}" class="btn btn-success btn-rounded">
+                                                            <i class="glyphicon  glyphicon-plus" style="margin-left: 1rem"></i>{{ "Create new Categorie"|trans }} </a>
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for categorie in categories %}
+                                                    <tr>
+                                                    
+                                                        <td>{{ categorie.designation }}</td>
+                                                        <td>{{ categorie.description }}</td>
+                                                        <td>
+                                                            {# <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-default btn-rounded"><i class="glyphicon  glyphicon-search"></i>
+                                                                 {{ "show"|trans }}
+                                                             </a>#}
+                                                            <a href="{{ path('categorie_edit', {'id': categorie.id}) }}" class="btn btn-primary btn-rounded"><i class="glyphicon  glyphicon-edit" style="margin-left: 1rem"></i>
+                                                                {{ "edit"|trans }}
+                                                            </a>
+                                                            <a href="{{ path('categorie_delete', {'id': categorie.id}) }}" class="btn btn-danger btn-rounded"><i class="glyphicon  glyphicon-trash" style="margin-left: 1rem"></i>
+                                                                {{ "Delete"|trans }}
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                {% else %}
+                                                    <tr class="text-center">
+                                                        <td colspan="3">{{ "no records found"|trans }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                                <br>
+                                                <div class="text-right" >
+                                                    {{ knp_pagination_render(categories) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /content area -->
+                </div>
+                <!-- /main content -->
+
+            </div>
+            <!-- /page content -->
+            {% include('layout/footer.html.twig') %}
+        </div>
+        <!-- /page container -->
+    {#</div>#}
+
+{% endblock %}

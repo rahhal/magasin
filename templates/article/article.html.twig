@@ -1,0 +1,207 @@
+
+{% extends 'base.html.twig' %}
+{% import "form.html.twig" as formulaire %}
+{# {% block title %} {{ app.user.email|upper }} {% endblock %} #}
+
+{% block body_class %} class="nav-md" {% endblock %}
+{% block body %}
+
+    {#<div class="layout-boxed navbar-top">#}
+        {% include('layout/navbar.html.twig') %}
+        <!-- Page container -->
+        <div class="page-container">
+            <!-- Page content -->
+            <div class="page-content">
+                <!-- Main content -->
+                <div class="content-wrapper">
+                    <!-- Page header -->
+                    <div class="col-md-12">
+                        <div class="page-header page-header-default">
+                            <div class="page-header-content">
+                                <div class="page-title">
+
+                                </div>
+                            </div>
+                            <div class="breadcrumb-line">
+                                <ul class="breadcrumb">
+                                    <li><a href="#"><i class="icon-home2 position-left"></i> الملف</a></li>
+                                    <li class="active">البضاعة</li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /page header -->
+                    <!-- Content area -->
+                    <div class="col-md-12">
+                        <div class="panel">
+                            <div class="col-md-12">
+
+                                <!-- Basic layout-->
+                                    <div class="panel panel-flat">
+                                        <div class="panel-heading">
+                                            {# <h1 class="panel-title">{{ form.vars.value.id == null ? "اضافة مادة جديدة"|trans :" تغيير المعطيات"|trans }}</h1> #}
+                                            <h1 class="panel-title">{{ form.vars.value.id == null ? "New article"|trans :"Edit information"|trans }}</h1>
+                                            <div class="heading-elements">
+                                                <ul class="icons-list">
+                                                    <li><a data-action="collapse"></a></li>
+                                                </ul>
+                                            </div>
+                                            {% include('layout/flash-messages.html.twig') %}
+                                        </div>
+                                        <hr>
+
+                                        <div class="panel-body">
+                                                {{ form_start(form, {'attr': {'class': 'form-horizontal form-label-left'}}) }}
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label" required="required">{{ "Libele ar"|trans }} </label>
+
+                                                    <div class="col-lg-6">
+                                                   {{ form_widget(form.libele,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                    </div>
+                                                </div>
+                                           {# {{ formulaire.input("col-md-6","Libele ar"|trans,form.libele,true) }}
+                                            {{ formulaire.input("col-md-6","Categorie"|trans,form.categorie,true) }}
+                                            {{ formulaire.input("col-md-6","Type"|trans,form.type,true) }}
+                                            {{ formulaire.input("col-md-6","Qte min"|trans,form.qte_min,true) }}
+                                            {{ formulaire.input("col-md-6","Qte ini"|trans,form.qte_ini,true) }}
+                                            {{ formulaire.input("col-md-6","Remarque"|trans,form.remarque,true) }}
+#}
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">{{ "Categorie"|trans }}</label>
+                                                    <div class="col-lg-6">
+                                                        {{ form_widget(form.categorie,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">{{ "Type"|trans }}</label>
+                                                    <div class="col-lg-6">
+                                                        {{ form_widget(form.type,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">{{ "Qte min"|trans }}</label>
+                                                    <div class="col-lg-6">
+                                                        {{ form_widget(form.qte_min,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                    </div>
+                                                </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-3 control-label">{{ "Qte ini"|trans }}</label>
+                                                <div class="col-lg-6">
+                                                    {{ form_widget(form.qte_ini,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-3 control-label">{{ "Remarque"|trans }}</label>
+                                                <div class="col-lg-6">
+                                                    {{ form_widget(form.remarque,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                </div>
+                                            </div>
+                                        <hr>
+                                            <div class="form-group">
+                                                {{ include('article/_form.html.twig') }}
+                                            </div>
+                                            {{ form_end(form) }}
+                                           {# {{ form_widget(form._token) }}
+                                            {{ form_end(form, {'render_rest': false}) }}#}
+                                        </div>
+                                    </div>
+                                <!-- /basic layout -->
+
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="panel">
+                                    <div class="title">
+                                        <h1> &nbsp;{{ "Article index"|trans }}&nbsp;&nbsp; </h1>
+
+                                        <hr>
+                                    </div>
+                                    <div class="content">
+                                        <div class="row">
+                                            {# ------------filtrage de recherche par categorie et type----------#}
+
+                                            <fieldset>
+                                                {{ form_start(form_search) }}
+
+                                                    <div class="col-lg-4">
+                                                        {#<label class="col-lg-3 control-label">{{ "Categorie"|trans }}</label>#}
+                                                        {{ form_widget(form_search.categorie,{'attr': {'class':'form-control col-lg-4'} }) }}
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        {#<label class="col-lg-3 control-label">{{ "Type"|trans }}</label>#}
+                                                        {{ form_widget(form_search.type,{'attr': {'class':'form-control col-lg-4'} }) }}
+                                                    </div>
+                                                    {#<div class="col-lg-4">
+                                                      <button class="btn btn-primary" type="submit" id="button-addon2"><i class="glyphicon glyphicon-search"></i>بحث</button>
+                                                    </div>#}
+                                                <div class="col-lg-4">
+                                                    <button class="btn btn-primary" type="submit" id="button-addon2"><i class="glyphicon glyphicon-search"></i>بحث</button>
+                                                </div>
+                                                {{ form_end(form_search) }}
+                                            </fieldset>
+                                            <br>
+
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                <tr class="bg-orange-800">
+                                                    <th>{{ "Libele ar"|trans }}</th>
+                                                    <th{% if articles.isSorted('a.categorie') %} class="sorted" {% endif %}>
+                                                        {{ knp_pagination_sortable(articles, 'Categorie'|trans, 'a.categorie')|raw }}</th>
+                                                     <th{% if articles.isSorted('a.type') %} class="sorted" {% endif %}>
+                                                         {{ knp_pagination_sortable(articles, 'Type'|trans, 'a.type')|raw }}</th>
+                                                    <th>{{ "Qte min"|trans }}</th>
+                                                    <th>{{ "Remarque"|trans }}</th>
+                                                    <th class="text-right">
+                                                        <a href="{{ path('article_new') }}" class="btn btn-success btn-rounded">
+                                                            <i class="glyphicon  glyphicon-plus" style="margin-left: 1rem"></i>{{ "Create new Article"|trans }} </a>
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for article in articles|sort|reverse %}
+                                                    <tr>
+                                                        <td>{{ article.libele }}</td>
+                                                        <td>{{ article.categorie }}</td>
+                                                        <td>{{ article.type }}</td>
+                                                        <td>{{ article.qteMin }}</td>
+                                                        <td>{{ article.remarque }}</td>
+                                                        <td>
+                                                           {# <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-default btn-rounded"><i class="glyphicon  glyphicon-search"></i>
+                                                                {{ "show"|trans }}
+                                                            </a>#}
+                                                            <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-primary btn-rounded"><i class="glyphicon  glyphicon-edit" style="margin-left: 1rem"></i>
+                                                                {{ "edit"|trans }}
+                                                            </a>
+                                                            <a href="{{ path('article_delete', {'id': article.id}) }}" class="btn btn-danger btn-rounded"><i class="glyphicon  glyphicon-trash" style="margin-left: 1rem"></i>
+                                                                {{ "Delete"|trans }}
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                {% else %}
+                                                    <tr class="text-center">
+                                                        <td colspan="7">{{ "no records found"|trans }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                            <br>
+                                            <div class="text-right" >
+                                                {{ knp_pagination_render(articles) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /content area -->
+                </div>
+                <!-- /main content -->
+
+            </div>
+            <!-- /page content -->
+            {% include('layout/footer.html.twig') %}
+        </div>
+    <!-- /page container -->
+{% endblock %}

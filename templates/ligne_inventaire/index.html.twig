@@ -1,0 +1,118 @@
+
+
+{% extends 'base.html.twig' %}
+{% import "form.html.twig" as formulaire %}
+{# {% block title %} {{ app.user.email|upper }} {% endblock %} #}
+
+{% block body_class %} class="nav-md" {% endblock %}
+{% block body %}
+
+    {#<div class="layout-boxed navbar-top">#}
+    {% include('layout/navbar.html.twig') %}
+    <!-- Page container -->
+    <div class="page-container">
+        <!-- Page content -->
+        <div class="page-content">
+            <!-- Main content -->
+            <div class="content-wrapper">
+                <!-- Page header -->
+                <div class="col-md-12">
+                    <div class="page-header page-header-default">
+                        <div class="page-header-content">
+                            <div class="page-title">
+
+                            </div>
+                        </div>
+                        <div class="breadcrumb-line">
+                            <ul class="breadcrumb">
+                                <li><a href="#"><i class="icon-home2 position-left"></i> الملف</a></li>
+                                <li class="active">الجرد</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /page header -->
+                <!-- Content area -->
+                <div class="col-md-12">
+                    <div class="panel">
+
+
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="title">
+                                    <h1> &nbsp;{{ "Ligne inventaire revision"|trans }}
+{#                                        &nbsp;&nbsp;{{ "now"|date("d/m/Y") }} #}
+                                        {% for ligne_inventaire in ligne_inventaires %}
+{#                                            {% if loop.first %}#}
+                                        {{ ligne_inventaire.inventaire.date|date("d/m/Y") }}
+{#                                            {% endif %}#}
+                                        {% endfor %}</h1>
+                                    <hr>
+                                </div>
+                                <div class="content">
+                                    <div class="row">
+
+                                        <table class="table table-bordered">
+                                            <thead>
+
+                                            <tr class="bg-orange-800">
+                                                <th>{{ "Article"|trans }}</th>
+                                                <th>{{ "Qte inv"|trans }}</th>
+                                                <th>{{ "Qte predict"|trans }}</th>
+                                                <th>{{ "Difference"|trans }}</th>
+{#                                                <th class="text-right">#}
+{#                                                    <a href="{{ path('inventaire_new') }}" class="btn btn-success btn-rounded">#}
+{#                                                        <i class="glyphicon  glyphicon-plus" style="margin-left: 1rem"></i>{{ "Create new inventaire"|trans }} </a>#}
+{#                                                </th>#}
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for ligne_inventaire in ligne_inventaires|sort|reverse %}
+                                                <tr>
+                                                    <td>{{ ligne_inventaire.article }}</td>
+                                                    <td>{{ ligne_inventaire.qteInv }}</td>
+                                                    <td>{{ ligne_inventaire.stock.qte }}</td>
+                                                    <td>{{ ligne_inventaire.qteInv-ligne_inventaire.stock.qte }}</td>
+{#                                                    <td>#}
+{#                                                        #}{# <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-default btn-rounded"><i class="glyphicon  glyphicon-search"></i>#}
+{#                                                             {{ "show"|trans }}#}
+{#                                                         </a>#}
+{#                                                        <a href="{{ path('inventaire_edit', {'id': inventaire.id}) }}" class="btn btn-primary btn-rounded"><i class="glyphicon  glyphicon-edit" style="margin-left: 1rem"></i>#}
+{#                                                            {{ "edit"|trans }}#}
+{#                                                        </a>#}
+{#                                                        <a href="{{ path('inventaire_delete', {'id': inventaire.id}) }}" class="btn btn-danger btn-rounded"><i class="glyphicon  glyphicon-trash" style="margin-left: 1rem"></i>#}
+{#                                                            {{ "Delete"|trans }}#}
+{#                                                        </a>#}
+{#                                                    </td>#}
+                                                </tr>
+                                            {% else %}
+                                                <tr class="text-center">
+                                                    <td colspan="4">{{ "no records found"|trans }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        <br>
+                                        <br>
+{#                                        <div class="text-right" >#}
+{#                                            {{ knp_pagination_render(ligne_inventaires) }}#}
+{#                                        </div>#}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /content area -->
+            </div>
+            <!-- /main content -->
+
+        </div>
+        <!-- /page content -->
+        {% include('layout/footer.html.twig') %}
+    </div>
+    <!-- /page container -->
+    {#</div>
+    </div>#}
+{% endblock %}

@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>magasin</title>
+    {% block stylesheets %}
+        {% include 'layout_header.html.twig' %}
+    {% endblock %}
+</head>
+<body {% block body_class %} {% endblock %}>
+<div id="message-alert"></div>
+{% block body %}
+
+ 
+
+{% endblock %}
+{% block javascripts %}
+    {% include 'layout_footer.html.twig' %}
+
+    <script>
+    //============================== Alert & Confirm ===============================================
+        var bloquerAlert = false;
+
+        function viewAlert(msg, tag, autoClose, fntAction) {
+            if (bloquerAlert)
+                return;
+
+            var color = 'dark';
+            var icon = '';
+            var title = '';
+            var animation = 'zoom';
+            var closeAnimation = 'scale';
+
+            if (tag == 'success') {
+                color = 'green';
+                icon = 'icon-checkmark4';
+                title = '{{ "Succès"|trans }}';
+                animation = 'scale';
+                closeAnimation = 'scale';
+            }
+            else if (tag == 'danger') {
+                color = 'red';
+                icon = 'icon-blocked';
+                title = '{{ "Alert"|trans }}';
+                animation = 'rotateY';
+                closeAnimation = 'rotateY';
+            }
+            else if (tag == 'warning') {
+                color = 'orange';
+                icon = 'icon-warning';
+                title = '{{ "Attention"|trans }}';
+                animation = 'rotateYR';
+                closeAnimation = 'rotateYR';
+            }
+            else if (tag == 'info') {
+                color = 'blue';
+                icon = 'icon-info3';
+                title = '{{ "Info"|trans }}';
+                animation = 'rotateX';
+                closeAnimation = 'rotateX';
+            }
+            else if (tag == 'primary') {
+                color = 'purple';
+            }
+            var options = {
+                icon: icon,
+                closeIcon: true,
+                type: color,
+                title: title,
+                content: msg,
+                animationBounce: 2.5,
+                closeAnimation: closeAnimation,
+                animation: animation,
+                buttons: {
+                    btnOk: {
+                        text: 'OK',
+                        btnClass: 'btn-default',
+                        keys: ['enter', 'echap'],
+                    }
+                }
+            };
+            if (autoClose !== undefined && autoClose != null)
+                options.autoClose = 'btnOk|' + autoClose;
+
+            if (fntAction !== undefined)
+                options.buttons.btnOk.action = fntAction;
+
+            $.alert(options);
+        };
+     //========================================= Génére message alert =========================================================================
+        function my_alert(msg, status, divalert, scrollTop) {
+            div_alert = $(divalert);
+
+            html_alert = '<div class="alert alert-' + status + '">' +
+                '<button data-dismiss="alert" class="close">&times;</button>' +
+                '<strong>';
+
+
+            switch (status) {
+                case 'success':
+                    html_alert += '<i class="fa fa-check-circle"></i>' +
+                        ' <strong>Succès!</strong>';
+                    break;
+                case 'danger':
+                    html_alert += '<i class="fa fa-times-circle"></i>' +
+                        ' <strong>Erreur!</strong>';
+                    break;
+                case 'warning':
+                    html_alert += '<i class="fa fa-exclamation-triangle"></i>' +
+                        ' <strong>Avertissement!</strong>';
+                    break;
+                case 'info':
+                    html_alert += '<i class="fa fa-info-circle"></i>' +
+                        ' <strong>Information!</strong>';
+                    break;
+                default:
+                    html_alert += '<i class="fa fa-check-circle"></i>' +
+                        ' <strong>Succès!</strong>';
+            }
+
+            html_alert += '</strong> ' + msg + '</div>';
+
+            div_alert.append(html_alert);
+
+            if (scrollTop !== undefined && scrollTop == true)
+                $('html, body').animate({scrollTop: $(divalert).offset().top}, 700, 'swing');
+        };
+//-------------------------------------
+  $('#export_database').click(function () {
+            let $this = $(this);
+            let i = $this.find('i');
+            let classI = i.attr('class');
+            i.attr('class', 'icon-spinner3 spinner');
+            $this.addClass('isDisabled');
+
+            $.ajax({
+                url: "{{ path('export_database') }}",
+                dataType: 'json',
+                complete: function () {
+                    i.attr('class', classI);
+                    $this.removeClass('isDisabled');
+                },
+                success: function (data) {
+                    // if (data == 1)
+                    //    { window.open('C:\\filesSQL/magasin_export.sql');
+                    //         alert(data.msg);}
+                    // else
+                    //    { viewAlert(data, 'danger');
+                       alert(data.msg);
+                    //    }
+                },
+                error: function (data) {
+                    //  my_alert(jqXHR.responseText, 'danger', '#message-alert');
+                     alert(data.msg);
+                }
+            });
+        });
+
+       $('form#import-database').submit(function (e) {
+            e.preventDefault();
+            let i = $('#import_database').find('i');
+            let classI = i.attr('class');
+            i.attr('class', 'icon-spinner3 spinner');
+            $('#import_database').addClass('isDisabled');
+
+            $.ajax({
+                type: "POST",
+                url: $(this).attr('action'),
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                dataType: 'json',
+                complete: function () {
+                    i.attr('class', classI);
+                    $('#import_database').removeClass('isDisabled');
+                    $('form#import-database').html('<input type="file" accept=".sql" id="file-sql" name="fileSQL">');
+                },
+                success: function (json) {
+                   /*  viewAlert(json.msg, json.status, null, function () {
+                        location.reload();
+                    }); */
+                    // console.log("success", json);
+                    alert(json.msg) ;
+                },
+                error: function (jqXHR) {
+                    my_alert(jqXHR.responseText, 'danger', '#message-alert');
+                }
+            });
+        });
+
+        $(document).on('change', '#file-sql', function () {
+            if ($(this)[0].files[0].name == "")
+                return;
+
+            $('form#import-database').submit();
+        });
+
+ </script>
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+{#
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ 'D:/project_magasin/src/Controller/ProfileController.php'|file_link(0) }}">src/Controller/ProfileController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'D:/project_magasin/templates/profile/index.html.twig'|file_link(0) }}">templates/profile/categorie.html.twig</a></code></li>
+    </ul>
+</div>
+{% endblock %}
+#}
+
+{% extends 'base.html.twig' %}
+
+{# {% block title %} {{ app.user.email|upper }} {% endblock %} #}
+{% block body_class %} class="nav-md" {% endblock %}
+{% block body %}
+
+    {#<div class="layout-boxed navbar-top">#}
+    {% include('layout/navbar.html.twig') %}
+    <!-- Page container -->
+    <div class="page-container">
+    <!-- Page content -->
+    <div class="page-content">
+        <!-- Main content -->
+        <div class="content-wrapper">
+            <!-- Page header -->
+            <div class="col-md-12">
+                <div class="page-header page-header-default">
+                    <div class="page-header-content">
+                        <div class="page-title">
+
+                        </div>
+                    </div>
+                    <div class="breadcrumb-line">
+                        <ul class="breadcrumb">
+                            <li><a href="#"><i class="icon-home2 position-left"></i> الملف</a></li>
+                            <li class="active">المستخدم</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /page header -->
+            <!-- Content area -->
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="col-md-12">
+
+                        <!-- Basic layout-->
+
+
+                        <div class="col-md-12">
+                            <div class="panel">
+                                <div class="title">
+                                    <h1> &nbsp;{{ "Profile"|trans }}&nbsp;&nbsp; </h1>
+                                    <hr>
+                                </div>
+                                <div class="content">
+                                    <div class="row">
+                                        {#<table class="table table-bordered">#}
+                                            <table class="table">
+                                                <tbody>
+                                                <tr>
+                                                    <th>{{ "Fullname" |trans }}</th>
+                                                    <td>{{ user.fullname }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>{{ "Societe" |trans }}</th>
+                                                    <td>{{ user.societe }}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th>{{ "Rib" |trans }}</th>
+                                                    <td>{{ user.rIB }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>{{ "Cin" |trans }}</th>
+                                                    <td>{{ user.cin }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>{{ "Tel" |trans }}</th>
+                                                    <td>{{ user.tel }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>{{ "Adresse" |trans }}</th>
+                                                    <td>{{ user.adresse }}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th>{{ "Email" |trans }}</th>
+                                                    <td>{{ user.email }}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th>{{ "Avatar" |trans }}</th>
+                                                    <td>{{ user.avatar }}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+
+                                        <hr>
+                                        <div class="form-group text-right" >
+                                           <a href="{{ path('profile_edit', {'id': user.id}) }}" class="btn btn-primary"><i class="glyphicon  glyphicon-edit" style="margin-left: 1rem"></i>
+                                                            {{ "edit"|trans }}
+                                            </a>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <!-- /content area -->
+                            </div>
+                            <!-- /main content -->
+
+                        </div>
+                        <!-- /page content -->
+        {% include('layout/footer.html.twig') %}
+    </div>
+    <!-- /page container -->
+    {#</div>
+    </div>#}
+{% endblock %}

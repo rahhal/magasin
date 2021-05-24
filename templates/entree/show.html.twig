@@ -1,0 +1,263 @@
+{#
+{% extends 'base.html.twig' %}
+
+{% block title %}Entree{% endblock %}
+
+{% block body %}
+    <h1>Entree</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entree.id }}</td>
+            </tr>
+            <tr>
+                <th>DateEntree</th>
+                <td>{{ entree.dateEntree ? entree.dateEntree|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_bc</th>
+                <td>{{ entree.dateBc ? entree.dateBc|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Reference</th>
+                <td>{{ entree.reference }}</td>
+            </tr>
+            <tr>
+                <th>Num_entree</th>
+                <td>{{ entree.numEntree }}</td>
+            </tr>
+            <tr>
+                <th>Num_bc</th>
+                <td>{{ entree.numBc }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('entree_new') }}">back to list</a>
+
+    <a href="{{ path('entree_edit', {'id': entree.id}) }}">edit</a>
+
+    {{ include('entree/_delete_form.html.twig') }}
+{% endblock %}
+#}
+{#
+{% extends 'base.html.twig' %}
+
+{% block title %}New Entree{% endblock %}
+
+{% block body %}
+    <h1>Create new Entree</h1>
+
+    {{ include('entree/_form.html.twig') }}
+
+    <a href="{{ path('entree_index') }}">back to list</a>
+{% endblock %}
+#}
+{% extends 'base.html.twig' %}
+
+{# {% block title %} {{ app.user.email|upper }} {% endblock %} #}
+{% block body_class %} class="nav-md" {% endblock %}
+{% block body %}
+
+    {#<div class="layout-boxed navbar-top">#}
+    {% include('layout/navbar.html.twig') %}
+    <!-- Page container -->
+    <div class="page-container">
+        <!-- Page content -->
+        <div class="page-content">
+            <!-- Main content -->
+            <div class="content-wrapper">
+                <!-- Page header -->
+                <div class="col-md-12">
+                    <div class="page-header page-header-default">
+                        <div class="page-header-content">
+                            <div class="page-title">
+
+                            </div>
+                        </div>
+                        <div class="breadcrumb-line">
+                            <ul class="breadcrumb">
+                                <li><a href="#"><i class="icon-home2 position-left"></i> الملف</a></li>
+                                <li class="active">دخول البضاعة</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /page header -->
+                <!-- Content area -->
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="col-md-12">
+
+                            <!-- Basic layout-->
+                            <div class="panel panel-flat">
+                                <div class="panel-heading">
+                                    <h1 class="panel-title">{{ "New Entree"|trans }}</h1>
+                                    <div class="heading-elements">
+                                        <ul class="icons-list">
+                                            <li><a data-action="collapse"></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <hr>
+
+                                <div class="panel-body">
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <th>{{ "Date entree"|trans }}</th>
+                                            <td>{{ entree.dateEntree ? entree.dateEntree|date('Y-m-d') : '' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>{{ "Date bon commande"|trans }}</th>
+                                            <td>{{ entree.dateBc ? entree.dateBc|date('Y-m-d') : '' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>{{ "Reference"|trans }}</th>
+                                            <td>{{ entree.reference }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>{{ "Numero entree"|trans }}</th>
+                                            <td>{{ entree.numEntree }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>{{ "Numero bon commande"|trans }}</th>
+                                            <td>{{ entree.numBc }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+
+                                    <hr>
+                                    <div class="form-group">
+                                        {#{{ include('entree/_form.html.twig') }}#}
+                                        <div class="text-right">
+                                            <a href="{{ path('entree_new') }}" class="btn btn-default"><i class="glyphicon glyphicon-arrow-right" style="margin-left: 1rem"></i>{{ "back to list"|trans }}</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    {#{{ form_end(form) }}#}
+
+                                </div>
+                            </div>
+                            <!-- /basic layout -->
+                        </div>
+                        <div class="col-md-12">
+                            <div class="panel">
+
+                                <div class="content">
+                                    <div class="row">
+
+                                        <!-- Basic layout-->
+                                        <div class="panel panel-flat">
+                                            <div class="panel-heading">
+                                                <h1 class="panel-title">{{ "Info Entree"|trans }}</h1>
+                                                <div class="heading-elements">
+                                                    <ul class="icons-list">
+                                                        <li><a data-action="collapse"></a></li>
+                                                    </ul>
+                                                </div>
+                                                {% include('layout/flash-messages.html.twig') %}
+                                            </div>
+                                            <hr>
+                                            <div class="panel-body">
+
+                                                <div class="col-md-6" >
+                                                    {{ form_start(form, {'attr': {'class': 'form-horizontal form-label-left'}}) }}
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 control-label">{{ "Article"|trans }}</label>
+                                                        <div class="col-lg-6">
+                                                            {{ form_widget(form.article,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-lg-3 control-label">{{ "Qte entr"|trans }}</label>
+                                                        <div class="col-lg-6">
+                                                            {{ form_widget(form.qte_entr,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                        </div>
+                                                    </div>
+                                                   {# <div class="form-group">
+                                                        <label class="col-lg-3 control-label">{{ "Qte reste"|trans }}</label>
+                                                        <div class="col-lg-6">
+                                                            {{ form_widget(form.qte_reste,{'attr': {'class':'form-control col-lg-6'} }) }}
+                                                        </div>
+                                                    </div>#}
+                                                    {#<img src="{{ asset('assets/images/index.jpeg')}}" alt="" style=" width : auto; margin-left: auto; margin-right: auto; display: block;">#}
+                                                    <hr>
+                                                    <div class="form-group">
+                                                        {{ include('ligne_entree/_form.html.twig') }}
+                                                    </div>
+                                                    {{ form_end(form) }}
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                        <tr class="bg-orange-800">
+                                                            <th>{{ "Article"|trans }}</th>
+                                                            <th>{{ "Qte entr"|trans }}</th>
+                                                            {#<th>{{ "Qte reste"|trans }}</th>#}
+                                                            <th></th>
+                                                            {# <th class="text-right">
+                                                                 <a href="{{ path('entree_show',{'id': entree.id}) }}" class="btn btn-success btn-rounded">
+                                                                     <i class="glyphicon  glyphicon-plus" style="margin-left: 1rem"></i>{{ "Create new Article"|trans }} </a>
+                                                             </th>#}
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        {% for ligne_entree in entree.ligneEntrees %}
+                                                            <tr>
+                                                                <td>{{ ligne_entree.article }}</td>
+                                                                <td>{{ ligne_entree.qteEntr }}</td>
+                                                                {#<td>{{ ligne_entree.qteReste }}</td>#}
+                                                                <td>
+                                                                    {# <a href="{{ path('entree_show', {'id': entree.id}) }}" class="btn btn-default btn-rounded"><i class="glyphicon  glyphicon-search"></i>
+                                                                         {{ "show"|trans }}
+                                                                     </a>#}
+                                                                    <a href="{{ path('ligne_entree_edit', {'id': ligne_entree.id}) }}" class="btn btn-primary btn-rounded"><i class="glyphicon  glyphicon-edit" style="margin-left: 1rem"></i>
+                                                                        {{ "edit"|trans }}
+                                                                    </a>
+                                                                    {# <a href="{{ path('entree_show', {'id': entree.id}) }}" class="btn btn-primary btn-rounded"><i class="glyphicon  glyphicon-edit" style="margin-left: 1rem"></i>
+                                                                         {{ "edit"|trans }}
+                                                                     </a>#}
+                                                                    <a href="{{ path('ligne_entree_delete', {'id': ligne_entree.id}) }}" class="btn btn-danger btn-rounded"><i class="glyphicon  glyphicon-trash" style="margin-left: 1rem"></i>
+                                                                        {{ "Delete"|trans }}
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+
+                                                        {% else %}
+                                                            <tr class="text-center">
+                                                                <td colspan="7">{{ "no records found"|trans }}</td>
+                                                            </tr>
+                                                        {% endfor %}
+                                                        </tbody>
+                                                    </table>
+ <br>
+                                            <div class="text-right" >
+                                                {{ knp_pagination_render(ligne_entrees) }}
+                                            </div>  
+                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /Basic layout-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /content area -->
+                        </div>
+                        <!-- /main content -->
+
+                    </div>
+                    <!-- /page content -->
+                    {% include('layout/footer.html.twig') %}
+                </div>
+                <!-- /page container -->
+            </div>
+        </div>
+    </div>
+{% endblock %}

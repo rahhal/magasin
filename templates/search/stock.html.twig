@@ -1,0 +1,89 @@
+
+{% extends 'base.html.twig' %}
+
+{# {% block title %} {{ app.user.email|upper }} {% endblock %} #}
+{% block body_class %} class="nav-md" {% endblock %}
+{% block body %}
+
+    {#<div class="layout-boxed navbar-top">#}
+    {% include('layout/navbar.html.twig') %}
+    <!-- Page container -->
+    <div class="page-container">
+        <!-- Page content -->
+        <div class="page-content">
+            <!-- Main content -->
+            <div class="content-wrapper">
+                <!-- Page header -->
+                <div class="col-md-12">
+                    <div class="page-header page-header-default">
+                        <div class="page-header-content">
+                            <div class="page-title">
+
+                            </div>
+                        </div>
+                        <div class="breadcrumb-line">
+                            <ul class="breadcrumb">
+                                <li><a href="#"><i class="icon-printer2 position-left"></i> الطباعة</a></li>
+                                <li class="active">المخزون الحالي</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /page header -->
+                <!-- Content area -->
+                <div class="col-md-12">
+                    <div class="panel">
+
+                        <div class="col-md-12">
+                            <div class="panel">
+                                {# <div class="title">
+                                    <h1> &nbsp;{{ "Print stock now"|trans }}&nbsp;&nbsp; </h1>
+
+                                    <hr>
+                                </div> #}
+                                <div class="content">
+                                    <div class="row">
+    <fieldset>
+    {{ form_start(form_search) }}
+
+    <div class="col-lg-4">
+            <label class="col-lg-3 control-label">{{ "Categorie"|trans }}</label>
+
+            {{ form_widget(form_search.categorie,{'attr': {'class':'form-control col-lg-4'} }) }}
+        </div>
+        <div class="col-lg-4">
+            <label class="col-lg-3 control-label">{{ "Type"|trans }}</label>
+
+            {{ form_widget(form_search.type,{'attr': {'class':'form-control col-lg-4'} }) }}
+        </div>
+        <div class="col-lg-4">
+        <label class="col-lg-3 control-label">{{ "Date"|trans }}</label>
+
+        {{ form_widget(form_search.date,{'attr': {'class':'form-control col-lg-4'} }) }}
+                                    </div>
+        <div class="col-lg-4">
+            <button class="btn btn-primary" type="submit" id="button-addon2"><i class="glyphicon glyphicon-print"></i>
+                {{ "print"|trans }} </button>
+        </div>
+
+        {{ form_end(form_search) }}
+    </fieldset>
+    <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /content area -->
+                </div>
+                <!-- /main content -->
+
+            </div>
+            <!-- /page content -->
+            {% include('layout/footer.html.twig') %}
+        </div>
+        <!-- /page container -->
+        {#</div>
+        </div>#}
+{% endblock %}

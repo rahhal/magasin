@@ -1,0 +1,217 @@
+
+{% block body %}
+{#{% set route = app.request.get('_route') %}#}
+    {#{% if is_granted('ROLE_SUPER_ADMIN') %}#}
+        {% if is_granted('ROLE_SUPER_ADMIN')== false %}
+            <!-- Main navbar -->
+            <div class="navbar navbar-inverse bg-indigo navbar-fixed-top">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ path('app_index') }}"><h1>منظومة المغازة</h1></a>
+                    <ul class="nav navbar-nav visible-xs-block">
+                        <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+                    </ul>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-mobile">
+                    <ul class="nav navbar-nav">
+
+                    <li class="dropdown  active">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="{{ asset('assets/images/home.png')}}" alt=""><br> معطيات عامة <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="{{ path('societe_show') }}"><img src="{{ asset('assets/images/home.png')}}" alt=""> المؤسسة</a></li>
+                                <li><a href="{{ path('annee_new') }}"><img src="{{ asset('assets/images/annee.png')}}" alt=""> السنة المالية</a></li>
+                                <li><a href="javascript:void(0);" id="export_database" ><i
+                                            class="icon-database-export position-left"></i>  حفظ المعطيات</a></li>
+                                <li>
+                                    <a href="javascript:void(0);" id="import_database" onclick="$('#file-sql').click();"><i
+                                                class="icon-database-upload position-left"></i> {{ " استرجاع المعطيات"|trans }}
+                                    </a>
+                                    <form action="{{ path('import_database') }}" method="post" enctype="multipart/form-data"
+                                        hidden id="import-database">
+                                        <input type="file" accept=".sql" id="file-sql" name="fileSQL">
+                                    </form>
+                              </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="{{ asset('assets/images/dossier1.png')}}" alt=""><br> الملف <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                 <li><a href="{{ path('categorie_new') }}"><img src="{{ asset('assets/images/category2.png')}}" alt=""> اصناف البضاعة </a></li>
+                                <li><a href="{{ path('type_new') }}"><img src="{{ asset('assets/images/categorie.png')}}" alt="">  انواع البضاعة</a></li>
+                                <li><a href="{{ path('article_new') }}"><img src="{{ asset('assets/images/article.png')}}" alt="">  البضاعة</a></li>
+                                <li><a href="{{ path('fournisseur_new') }}"><img src="{{ asset('assets/images/fournisseur4.png')}}" alt="">  المزودون</a></li>
+                                <li><a href="{{ path('fonction_new') }}"><img src="{{ asset('assets/images/employee.png')}}" alt="">  الوظائف</a></li>
+                                <li><a href="{{ path('benificiaire_new') }}"><img src="{{ asset('assets/images/beneficiaire.png')}}" alt="">  المستفيدون</a></li>
+                              
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="{{ asset('assets/images/stock3.png')}}" alt=""><br> المخزون <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="{{ path('stock_ini') }}">
+                                        {#<i class="icon-IE"></i>#}
+                                        المخزون الاولي
+                                    </a></li>
+                                {#<li><a href="#"><i class="icon-IE"></i> تحديد المخزون</a></li>#}
+                                <li><a href="{{ path('stock_index') }}">
+                                        {#<i class="icon-IE"></i>#}
+                                        المخزون الحالي
+                                    </a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="{{ asset('assets/images/consom.png')}}" alt="">
+                                <br> المواد المستهلكة <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                {# <li><a href="{{ path('entree_new') }}"><i class="icon-IE"></i> دخول البضاعة</a></li>
+                                <li><a href="{{ path('sortie_new') }}"><i class="icon-IE"></i> خروج البضاعة</a></li>
+                          #}
+                                <li><a href="{{ path('entree_new') }}"> دخول البضاعة</a></li>
+                                <li><a  href="{{ path('sortie_new') }}"> خروج البضاعة</a></li>
+
+                            </ul>
+
+                        </li>
+                        {# <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="{{ asset('assets/images/nconsom.png')}}" alt=""><br> المواد الدائمة <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="{{ path('entree_new') }}"> دخول البضاعة</a></li>
+                                <li><a href="{{ path('sortie_new') }}"> خروج البضاعة</a></li>
+                            </ul>
+                        </li>#}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="{{ asset('assets/images/inv1.png')}}" alt=""><br> الجرد <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="{{  path('inventaire_new') }}"> الجرد اليومي</a></li>
+                                <li><a href="{{  path('ligne_inventaire_list') }}"> مراجعة المخزون</a></li>
+                                <li><a href="{{  path('inventaire_index') }}"> الجرد السنوي</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="{{ asset('assets/images/imprimer1.png')}}" alt="">
+
+                                <br> الطباعة <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="{{  path('stock_search') }}"><i class="icon-printer2"></i> المخزون الحالي</a></li>
+                                {#                    <li><a href="{{  path('inv_pdf') }}"> بطاقة جرد</a></li>#}
+                                <li><a href="{{  path('inventaire_search') }}"><i class="icon-printer2"></i> بطاقة جرد</a></li>
+                                <li><a href="{{  path('stock_search1') }}"><i class="icon-printer2"></i> بطاقة محزون</a></li>
+                                <li><a href="{{  path('stock_search1') }}"><i class="icon-printer2"></i> بطاقة محزون بالتاريخ</a></li>
+                                {# <li><a href="{{  path('ligne_inventaire_list') }}"><i class="icon-printer2"></i> بطاقة محزون بالصنف و التاريخ</a></li>
+                                 <li><a href="#"><i class="icon-printer2"></i> بطاقة محزون بالصنف</a></li>#}
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="{{ asset('assets/images/stat2.png')}}" alt=""><br> الاحصائيات <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="{{  path('stock_search2') }}"> كمية البضاعة في المخزون</a></li>
+                                {#<li><a href="#"> الكمية المحددة لكل بضاعة</a></li>#}
+                                <li><a href="{{ path('pourcentage') }}"> نسبة كل صنف في المحزون</a></li>
+                                <li><a href="{{ path('entree_search3') }}"> احصائيات دخول البضاعة</a></li>
+                                <li><a href="{{ path('sortie_search4') }}"> احصائيات خروج البضاعة </a></li>
+                                {#  <li><a href="#"> مراجعة المخزون</a></li>
+                                  <li><a href="#"> مقارنة النمو بين الدخول و الخروج حسب الاشهر</a></li>#}
+                            </ul>
+                        </li>
+                       {#  <li class="dropdown">
+                            <a href="{{ path('app_logout') }}" >
+                                <img src="{{ asset('assets/images/fermer1.png')}}" alt=""><br>  الخروج
+                            </a>
+                        </li> #}
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="{{ asset('uploads/Icones/'~app.user.avatar) }}" alt=""  class="img-circle img-sm">
+                                <br>{{ app.user.username }}
+                                <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="{{ path('profile') }}"><i class="icon-user-plus"></i> الملف الشخصي</a></li>
+                                <li><a href="{{ path('app_logout') }}"><i class="icon-switch2"></i> الخروج</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <br>
+            <br>
+            <!-- /main navbar -->
+
+
+{#{% else %}#}
+        {#{% else %}#}
+            {% elseif is_granted('ROLE_SUPER_ADMIN') %}
+
+{#{% elseif is_granted('ROLE_ENTREPRISE') %}#}
+
+    <!-- Main navbar -->
+    <div class="navbar navbar-inverse bg-indigo navbar-fixed-top">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ path('app_index') }}"><h1>منظومة المغازة</h1></a>
+            <ul class="nav navbar-nav visible-xs-block">
+                <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
+            </ul>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-mobile">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="{{ path('admin_list') }}" >
+                        <img src="{{ asset('assets/images/inv1.png')}}" alt=""><br> {{"Administration"|trans}}
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="{{ path('user_index') }}">
+                        <img src="{{ asset('assets/images/stat2.png')}}" alt=""><br> {{"Users"|trans}}
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="{{ path('app_logout') }}" >
+                        <img src="{{ asset('assets/images/fermer1.png')}}" alt=""><br>  الخروج
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="{{ asset('uploads/Icones/'~app.user.avatar) }}" alt=""  class="img-circle img-sm">
+                        <br>{{ app.user.username }}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a href="{{ path('profile') }}"><i class="icon-user-plus"></i> الملف الشخصي</a></li>
+                        <li><a href="{{ path('app_logout') }}"><i class="icon-switch2"></i> الخروج</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <br>
+    <!-- /main navbar -->
+
+{% endif %}
+{% endblock %}
+
